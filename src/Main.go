@@ -1,11 +1,13 @@
 package main
 
 import (
+	"CaSh/dirops"
+	// "CaSh/fileops"
+	"bufio"
 	"fmt"
 	"os"
 	"os/user"
-	"CaSh/fileops"
-	"CaSh/dirops"
+	"strings"
 )
 
 func main() {
@@ -31,8 +33,37 @@ func main() {
 		os.Exit(1)
 	}
 
-	fmt.Printf("[ %s@%s#%s ] -> ", currentUser.Username, currentHost, currentDir)
-	dirops.Whereami()
-	fileops.Makefile("Hello.txt")
-	fileops.Readfile("Test.txt")
+	reader := bufio.NewReader(os.Stdin)
+	for {
+		fmt.Printf("[ %s@%s#%s ] -> ", currentUser.Username, currentHost, currentDir)
+		rawLine, readingErr := reader.ReadString('\n')
+		if readingErr != nil {
+			fmt.Printf("(FATAL) Reading Line failed! Exiting...\nError: %e", readingErr)
+			os.Exit(2)
+		}
+
+		formattedLine := strings.Split(strings.ToLower(strings.TrimSpace(rawLine)), " ")
+		switch formattedLine[0] {
+		default:
+			fmt.Printf("Unknown command: %s\n", formattedLine[0])
+
+		case "lookaround":
+			if len(formattedLine) == 1 {
+				dirops.Lookaround("")
+			} else {
+				dirops.Lookaround(formattedLine[1])
+			}
+
+		case "exit":
+			fmt.Println("Bye!")
+			os.Exit(0)
+
+		case "echo":
+			printBuf := ""
+			for _, i := range(formattedLine[1:]) {
+				printBuf += i + " "
+			}
+			fmt.Printf("%s\n", printBuf)
+		}
+	}
 }

@@ -9,7 +9,7 @@ func Makefile(fileName string) {
 	_, creationErr := os.Create(fileName)
 	if creationErr != nil {
 		fmt.Printf("Could not create file!\nError: %e\n", creationErr)
-	} else {
-		fmt.Printf("Successfully created file '%s'", fileName)
+		return
 	}
+	fmt.Printf("Successfully created file '%s'", fileName)
 }
