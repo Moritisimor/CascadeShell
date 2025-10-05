@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	// Gather environment variables
+	// !----------- Start Gathering environment variables -----------!
 	currentUser, userErr := user.Current()
 	if userErr != nil {
 		fmt.Printf("Could not read current user!\nError: %e\n", userErr)
@@ -32,7 +32,9 @@ func main() {
 		fmt.Printf("Could not read current directory!\nError: %e\n", dirErr)
 		os.Exit(1)
 	}
+	// !----------- Stop Gathering environment variables -----------!
 
+	// !----------- Start REPL -----------!
 	reader := bufio.NewReader(os.Stdin)
 	for {
 		fmt.Printf("[ %s@%s#%s ] -> ", currentUser.Username, currentHost, currentDir)
@@ -58,7 +60,7 @@ func main() {
 			fmt.Println("Bye!")
 			os.Exit(0)
 
-		case "echo":
+		case "print":
 			printBuf := ""
 			for _, i := range(formattedLine[1:]) {
 				printBuf += i + " "
@@ -66,4 +68,5 @@ func main() {
 			fmt.Printf("%s\n", printBuf)
 		}
 	}
+	// !----------- Stop REPL -----------!
 }
