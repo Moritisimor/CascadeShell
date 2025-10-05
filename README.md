@@ -1,2 +1,2 @@
 # CascadeShell
-A user-friendly Shell written in Go.
+A highly user-friendly Shell written in Go.
