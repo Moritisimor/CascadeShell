@@ -33,7 +33,7 @@ Chdir <Destination>
 ```
 This command will change the current directory to the target, telling the user if all went right, or if something failed.
 
-Valid Mnemonics include Changedirectory, Chdir and Changedir.
+Valid Mnemonics include ```Changedirectory```, ```Chdir``` and ```Changedir```.
 
 ### Gohome
 ```Console
@@ -90,7 +90,7 @@ Print <Content>
 ```
 This command will print the specified Content to the console.
 
-Valid Mnemonics include Echo, Say and Print.
+Valid Mnemonics include ```Echo```, ```Say``` and ```Print```.
 
 ### Exit
 ```Console
