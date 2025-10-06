@@ -11,17 +11,42 @@ Then CλSH may be the Shell for you!
 
 Designed to be highly user-friendly and portable, this Shell is really made for everyone. The commands are intuitive and read like plain english.
 
-## Commands
+## Known issues
+Like with virtually any other project out there, CλSH has its issues too. These include, but not are limited to:
 
+- Using lookaround on directories will not work
+- Readfile is not always very reliable and sometimes does not read a file.
+- The ```--showhidden``` flag for lookaround does not work.
+
+## Commands
 The commands themselves are not a reinvention of the wheel, but rather an abstraction of what may otherwise appear like unreadable text to the average user.
 
-Unlike with many other shells, CλSH Talks a lot and will inform the user of success or failure. This is an intentional design choice and serves to help the average user.
+Unlike with many other shells, CλSH Talks a lot and will inform the user of success or failure. This is an intentional design choice and serves to help the average user. 
 
-### Change Directory
+CλSH also uses mnemonics, built-in aliases if you will, making commands have several correct versions. Most commands are also case-insensitive, but arguments may be.
+
+Commands have no other valid mnemonics unless explicitly specified.
+
+### Chdir
 ```Console
 Chdir <Destination>
 ```
 This command will change the current directory to the target, telling the user if all went right, or if something failed.
+
+Valid Mnemonics include Changedirectory, Chdir and Changedir.
+
+### Gohome
+```Console
+Gohome
+```
+This command will take the user to their home directory. Functionally, it is identical to Commands like
+```Console
+Chdir
+```
+or
+```Console
+Chdir /home/exampleuser
+```
 
 ### Lookaround
 ```Console
@@ -53,11 +78,19 @@ Writefile <Target> <Content>
 ```
 This command will write the specified content to the specified file.
 
+### Removefile
+```Console
+Removefile <Target>
+```
+This command will remove the specified file.
+
 ### Print
 ```Console
 Print <Content>
 ```
 This command will print the specified Content to the console.
+
+Valid Mnemonics include Echo, Say and Print.
 
 ### Exit
 ```Console

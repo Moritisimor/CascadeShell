@@ -12,5 +12,5 @@ func Readfile(fileName string) {
 		return
 	}
 
-	fmt.Printf("File content: %s", string(openedFile))
+	fmt.Printf("File content: \n%s\n", string(openedFile))
 }

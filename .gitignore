@@ -1,0 +1,7 @@
+# Directory for build-artifacts/binaries
+/bin
+
+# IDE-specific folders
+
+/.vscode
+/.idea

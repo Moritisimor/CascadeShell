@@ -11,5 +11,5 @@ func Makefile(fileName string) {
 		fmt.Printf("Could not create file!\nError: %e\n", creationErr)
 		return
 	}
-	fmt.Printf("Successfully created file '%s'", fileName)
+	fmt.Printf("Successfully created file '%s'\n", fileName)
 }

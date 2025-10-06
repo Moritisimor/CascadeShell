@@ -2,7 +2,7 @@ package main
 
 import (
 	"CaSh/dirops"
-	// "CaSh/fileops"
+	"CaSh/fileops"
 	"bufio"
 	"fmt"
 	"os"
@@ -11,15 +11,15 @@ import (
 )
 
 func main() {
-	// !----------- Start Gathering environment variables -----------!
+	// !----------- Start Gathering environment variables -----------! \\
 	currentUser, userErr := user.Current()
 	if userErr != nil {
 		fmt.Printf("Could not read current user!\nError: %e\n", userErr)
 		os.Exit(1)
 	}
 
-	currentHome := currentUser.HomeDir
-	os.Chdir(currentHome)
+	userHome := currentUser.HomeDir
+	os.Chdir(userHome)
 
 	currentHost, hostErr := os.Hostname()
 	if hostErr != nil {
@@ -32,12 +32,12 @@ func main() {
 		fmt.Printf("Could not read current directory!\nError: %e\n", dirErr)
 		os.Exit(1)
 	}
-	// !----------- Stop Gathering environment variables -----------!
+	// !----------- Stop Gathering environment variables -----------! \\
 
-	// !----------- Start REPL -----------!
+	// !----------- Start REPL -----------! \\
 	reader := bufio.NewReader(os.Stdin)
 	for {
-		fmt.Printf("[ %s@%s#%s ] -> ", currentUser.Username, currentHost, currentDir)
+		fmt.Printf("( %s@%s#%s ) -> ", currentUser.Username, currentHost, currentDir)
 		rawLine, readingErr := reader.ReadString('\n')
 		if readingErr != nil {
 			fmt.Printf("(FATAL) Reading Line failed! Exiting...\nError: %e", readingErr)
@@ -50,10 +50,15 @@ func main() {
 			fmt.Printf("Unknown command: %s\n", formattedLine[0])
 
 		case "lookaround":
+			showHidden := false
+			if strings.Contains(rawLine, "--showhidden") {
+				showHidden = true
+			}
+			
 			if len(formattedLine) == 1 {
-				dirops.Lookaround("")
+				dirops.Lookaround("", showHidden) // An empty string means the current directory.
 			} else {
-				dirops.Lookaround(formattedLine[1])
+				dirops.Lookaround(formattedLine[1], showHidden)
 			}
 
 		case "whereami":
@@ -61,14 +66,42 @@ func main() {
 
 		case "chdir", "changedir", "changedirectory":
 			if len(formattedLine) == 1 {
-				dirops.Chdir(currentHome)
+				dirops.Chdir(userHome)
 			} else {
 				dirops.Chdir(formattedLine[1])
 			}
+
+			if formattedLine[1] == "/" {
+				fmt.Println("Be careful when you're in the root directory!")
+			}
 			currentDir = dirops.Pwd()
 
+		case "makefile":
+			if len(formattedLine) < 2 {
+				fmt.Println("Illegal Argument Count! To use makefile you must specify the name of the file you want to create." + 
+							"Example: makefile hello.txt")
+				return
+			}
+			fileops.Makefile(formattedLine[1])
+
+		case "readfile":
+			if len(formattedLine) < 2 {
+				fmt.Println("Illegal Argument Count! To use readfile you must specify the name of the file you want to read." + 
+							"Example: readfile hello.txt")
+				return
+			}
+			fileops.Readfile(formattedLine[1])
+
+		case "removefile":
+			if len(formattedLine) < 2 {
+				fmt.Println("Illegal Argument Count! To use removefile you must specify the name of the file you want to remove." + 
+							"Example: removefile hello.txt")
+				return
+			}
+			fileops.Removefile(formattedLine[1])
+
 		case "gohome":
-			dirops.Chdir(currentHome)
+			dirops.Chdir(userHome)
 
 		case "exit", "quit":
 			fmt.Println("Bye!")
@@ -82,5 +115,5 @@ func main() {
 			fmt.Printf("%s\n", printBuf)
 		}
 	}
-	// !----------- Stop REPL -----------!
+	// !----------- Stop REPL -----------! \\
 }

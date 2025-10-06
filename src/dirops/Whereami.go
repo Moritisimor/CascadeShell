@@ -14,7 +14,7 @@ func Whereami() {
 func Pwd() string {
 	currentDir, dirErr := os.Getwd()
 	if dirErr != nil {
-		return "PANIC!!! UNDEFINED WORKING DIRECTORY!"
+		return "PANIC!!! UNDEFINED WORKING DIRECTORY!\n"
 	} 
 	return currentDir
 }
