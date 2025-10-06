@@ -44,8 +44,8 @@ func main() {
 			os.Exit(2)
 		}
 
-		formattedLine := strings.Split(strings.ToLower(strings.TrimSpace(rawLine)), " ")
-		switch formattedLine[0] {
+		formattedLine := strings.Split(strings.TrimSpace(rawLine), " ")
+		switch strings.ToLower(formattedLine[0]) {
 		default:
 			fmt.Printf("Unknown command: %s\n", formattedLine[0])
 
@@ -56,11 +56,25 @@ func main() {
 				dirops.Lookaround(formattedLine[1])
 			}
 
-		case "exit":
+		case "whereami":
+			dirops.Whereami()
+
+		case "chdir", "changedir", "changedirectory":
+			if len(formattedLine) == 1 {
+				dirops.Chdir(currentHome)
+			} else {
+				dirops.Chdir(formattedLine[1])
+			}
+			currentDir = dirops.Pwd()
+
+		case "gohome":
+			dirops.Chdir(currentHome)
+
+		case "exit", "quit":
 			fmt.Println("Bye!")
 			os.Exit(0)
 
-		case "print":
+		case "print", "say", "echo":
 			printBuf := ""
 			for _, i := range(formattedLine[1:]) {
 				printBuf += i + " "
