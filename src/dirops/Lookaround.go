@@ -13,13 +13,18 @@ func Lookaround(dirName string) {
 	}
 
 	dirs, err := os.ReadDir(dir)
-	fmt.Println("Subdirectories:")
 
 	if err != nil {
 		fmt.Println()
 	} else {
-		for _, i := range(dirs) {
-			fmt.Printf("-> %s\n", i.Name())
+		entryCounter := 0
+		fmt.Println("Subdirectories and Files:")
+		for _, entry := range(dirs) {
+			fmt.Printf("-> %s\n", entry.Name())
+			entryCounter++
+		}
+		if entryCounter == 0 {
+			fmt.Println("Empty directory.")
 		}
 	}
 }
