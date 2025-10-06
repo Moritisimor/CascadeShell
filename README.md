@@ -23,7 +23,7 @@ The commands themselves are not a reinvention of the wheel, but rather an abstra
 
 Unlike with many other shells, CλSH Talks a lot and will inform the user of success or failure. This is an intentional design choice and serves to help the average user. 
 
-CλSH also uses mnemonics, built-in aliases if you will, making commands have several correct versions. Most commands are also case-insensitive, but arguments may be.
+CλSH also uses mnemonics, built-in aliases if you will, making commands have several correct versions. Most commands are also case-insensitive, but arguments may not be.
 
 Commands have no other valid mnemonics unless explicitly specified.
 
