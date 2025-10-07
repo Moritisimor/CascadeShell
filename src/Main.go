@@ -6,6 +6,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"os/exec"
 	"os/user"
 	"strings"
 )
@@ -53,7 +54,13 @@ func main() {
 		formattedLine := strings.Split(strings.TrimSpace(rawLine), " ")
 		switch strings.ToLower(formattedLine[0]) {
 		default:
-			fmt.Printf("Unknown command: %s\n", formattedLine[0])
+			cmd := exec.Command(formattedLine[0], formattedLine[1:]...)
+			cmd.Stdout = os.Stdout
+			cmd.Stderr = os.Stderr
+			cmd.Stdin = os.Stdin
+			if err := cmd.Run(); err != nil {
+				fmt.Printf("Unknown command: %s\n", formattedLine[0])
+			}
 
 		case "lookaround":
 			showHidden := false
