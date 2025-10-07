@@ -117,6 +117,9 @@ func main() {
 		case "gohome":
 			dirops.Chdir(userHome)
 
+		case "clear":
+			fmt.Print("\033[H\033[2J\033[3J") // ANSI Escape Code for clearing screen and scrollback buffer
+
 		case "exit", "quit", "bye":
 			fmt.Println("Bye!")
 			os.Exit(0)
