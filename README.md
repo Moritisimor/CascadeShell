@@ -1,129 +1,62 @@
 # CλSH
 The Portable and User-Friendly Shell written in Go.
 
-## Ever heard of POSIX-Compliancy?
-We don't care about that around here.
-
-Ever feel like you're reading utter nonsense when looking at classical
-Shell-Scripts?
-
-Then CλSH may be the Shell for you! 
-
-Designed to be highly user-friendly and portable, this Shell is really made for everyone. The commands are intuitive and read like plain english.
+## What is this project about?
+This project is a shell entirely written in go. It is designed to be portable, small and run anywhere, only including what it has to and leaving the rest to the OS.
 
 ## Known issues
 Like with virtually any other project out there, CλSH has its issues too. These include, but not are limited to:
 
-- Readfile is not always very reliable and sometimes does not read a file.
-- The ```--showhidden``` flag for lookaround does not work.
 - Ctrl + C does not work, or rather, it does, but will quit the shell, not the currently running program.
 
 ## Commands
-The commands themselves are not a reinvention of the wheel, but rather an abstraction of what may otherwise appear like unreadable text to the average user.
-
 Unlike with many other shells, CλSH Talks a lot and will inform the user of success or failure. This is an intentional design choice and serves to help the average user. 
 
-CλSH also uses mnemonics, built-in aliases if you will, making commands have several correct versions. Most commands are also case-insensitive, but arguments may not be.
-
-Commands have no other valid mnemonics unless explicitly specified.
-
-### Run
-```Console
-Run <Program> <Program-specific parameters...>
-```
-This command will run the specified program, ignoring built-in commands and opting for OS-specific programs instead.
-
-Valid Mnemonics include 
+CλSH has a few built in commands, these include: 
 
 ### Chdir
 ```Console
-Chdir <Destination>
+chdir <Destination>
 ```
 This command will change the current directory to the target, telling the user if all went right, or if something failed.
 
-Valid Mnemonics include ```Changedirectory``` and ```Changedir```.
-
-### Makedir
-```Console
-Mkdir <Target>
-```
-This command will create a folder with the specified name at the specified target.
-
-Valid Mnemonics Include ```Makedirectory``` and ```Mkdir```
-
-### Gohome
-```Console
-Gohome
-```
-This command will take the user to their home directory. Functionally, it is identical to Commands like
-```Console
-Chdir
-```
-or
-```Console
-Chdir /home/exampleuser
-```
+The only valid variation of this command is ```cd```
 
 ### Lookaround
 ```Console
-Lookaround <Target>
+lookaround
 ```
-This command will show the subdirectories and files of a given Target directory. If no target is given, it will use the current directory.
 
-The only valid Mnemonic is ```ls```
+The only valid variation of this command is ```ls```.
 
-### Whereami
+### Clear
+```console
+clear
+```
+This command will clear the screen and scrollbuffer.
+
+The only valid variation of this command is ```clearscreen```
+
+### Gohome
 ```Console
-Whereami
+gohome
 ```
-This command will print where you currently are in the Filesystem as the absolute path.
-
-The only valid Mnemonic is ```pwd```
-
-### Makefile
-```Console
-Makefile <Target>
-```
-This command will create a new, empty File at the specified Target.
-
-The only valid Mnemonic is ```touch```
-
-### Readfile
-```Console
-Readfile <Target>
-```
-This command will read the contents of the specified file and print it to the console.
-
-The only valid Mnemonic is ```cat```
-
-### Writefile
-```Console
-Writefile <Target> <Content>
-```
-This command will write the specified content to the specified file.
-
-### Removefile
-```Console
-Removefile <Target>
-```
-This command will remove the specified file.
-
-The only valid Mnemonic is ```rm```
+This command will take the user to their home directory.
 
 ### Print
 ```Console
-Print <Content>
+print <Content>
 ```
 This command will print the specified Content to the console.
 
-Valid Mnemonics include ```Echo``` and ```Say```
+Valid variations include ```echo``` and ```say```.
 
 ### Exit
 ```Console
-Exit
+exit
 ```
 This command will break the Read-Eval-Print-Loop, effectively terminating the running CλSH Process and exiting the program.
 
-Valid Mnemonics include ```quit``` and ```bye```
+The only valid variation of this command is ```bye```.
 
 ###### Note: The list of Commands is always subject to change as this project is WIP.
