@@ -47,7 +47,7 @@ func main() {
 		fmt.Printf("( %s@%s#%s ) -> ", currentUser.Username, currentHost, currentDir)
 		rawLine, readingErr := reader.ReadString('\n')
 		if readingErr != nil {
-			fmt.Printf("(FATAL) Reading Line failed! Exiting...\nError: %e", readingErr)
+			fmt.Printf("FATAL! Reading Line failed! Exiting...\nError: %s", readingErr.Error())
 			os.Exit(2)
 		}
 
@@ -58,7 +58,9 @@ func main() {
 			cmd.Stdout = os.Stdout
 			cmd.Stderr = os.Stderr
 			cmd.Stdin = os.Stdin
-			runErr:= cmd.Run(); if runErr != nil {
+			runErr:= cmd.Run()
+
+			if runErr != nil {
 				fmt.Println(runErr.Error())
 			} else {
 				fmt.Printf("Command %s executed successfully.\n", formattedLine[0])
@@ -69,11 +71,16 @@ func main() {
 			cmd.Stdout = os.Stdout
 			cmd.Stderr = os.Stderr
 			cmd.Stdin = os.Stdin
-			runErr := cmd.Run(); if runErr != nil {
+			runErr := cmd.Run()
+
+			if runErr != nil {
 				fmt.Println(runErr.Error())
 			} else {
 				fmt.Printf("Command %s executed successfully.\n", formattedLine[1])
 			}
+
+		case "":
+			// Do nothing.
 
 		case "lookaround", "ls":
 			showHidden := false
@@ -105,7 +112,7 @@ func main() {
 		case "mkdir", "makedirectory", "makedir":
 			if len(formattedLine) == 1 {
 				fmt.Println("Illegal argument count! mkdir requires one following argument, specifying the directory name.\n" +
-					"Example: mdkir ExampleFolder")
+							"Example: mdkir ExampleFolder")
 			} else {
 				dirops.Makedir(formattedLine[1])
 			}
@@ -113,7 +120,7 @@ func main() {
 		case "makefile", "touch":
 			if len(formattedLine) < 2 {
 				fmt.Println("Illegal Argument Count! To use makefile you must specify the name of the file you want to create." +
-					"Example: makefile hello.txt")
+							"Example: makefile hello.txt")
 				return
 			}
 			fileops.Makefile(formattedLine[1])
@@ -121,15 +128,23 @@ func main() {
 		case "readfile", "cat":
 			if len(formattedLine) < 2 {
 				fmt.Println("Illegal Argument Count! To use readfile you must specify the name of the file you want to read.\n" +
-					"Example: readfile hello.txt")
+							"Example: readfile hello.txt")
 				return
 			}
 			fileops.Readfile(formattedLine[1])
 
+		case "writefile", "tee":
+			if len(formattedLine) < 3 {
+				fmt.Println("Illegal Argument Count! To use writefile you must specify the name of the file you want to write to and the contents after.\n" + 
+							"Example: writefile hello.txt hello!")
+				return
+			}
+			fileops.Writefile(formattedLine[1], strings.Join(formattedLine[2:], " "))
+
 		case "removefile", "rm":
 			if len(formattedLine) < 2 {
 				fmt.Println("Illegal Argument Count! To use removefile you must specify the name of the file you want to remove.\n" +
-					"Example: removefile hello.txt")
+							"Example: removefile hello.txt")
 				return
 			}
 			fileops.Removefile(formattedLine[1])

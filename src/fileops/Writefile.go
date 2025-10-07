@@ -6,7 +6,7 @@ import (
 )
 
 func Writefile(fileName string, fileContent string) {
-	err := os.WriteFile(fileName, []byte(fileContent), os.ModeAppend)
+	err := os.WriteFile(fileName, []byte(fileContent), 0755)
 	if err != nil {
 		fmt.Println(err.Error())
 		return
