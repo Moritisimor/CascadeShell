@@ -16,6 +16,7 @@ Like with virtually any other project out there, CλSH has its issues too. These
 
 - Readfile is not always very reliable and sometimes does not read a file.
 - The ```--showhidden``` flag for lookaround does not work.
+- Ctrl + C does not work, or rather, it does, but will quit the shell, not the currently running program.
 
 ## Commands
 The commands themselves are not a reinvention of the wheel, but rather an abstraction of what may otherwise appear like unreadable text to the average user.
