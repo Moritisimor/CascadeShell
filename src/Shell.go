@@ -103,6 +103,9 @@ func main() {
 				fmt.Println("Empty directory.")
 			}
 
+		case "whereami", "pwd":
+			fmt.Printf("You are in: %s\n", getCurrentDir())
+
 		case "clear", "clearscreen", "clr":
 			fmt.Print("\033[H\033[2J\033[3J") // ANSI Escape Code for clearing screen and scrollback buffer
 

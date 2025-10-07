@@ -26,7 +26,7 @@ CλSH has a few built in commands, these include:
 ```Console
 chdir <Destination>
 ```
-This command will change the current directory to the target, telling the user if all went right, or if something failed.
+This command will change the current directory to the target.
 
 The only valid variation of this command is ```cd```
 
@@ -36,6 +36,14 @@ lookaround
 ```
 
 The only valid variation of this command is ```ls```.
+
+### Whereami
+```Console
+whereami
+```
+This command will print the current directory as an absolute path.
+
+The only valid variation of this command is ```pwd```
 
 ### Clear
 ```console
