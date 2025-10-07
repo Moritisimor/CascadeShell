@@ -72,6 +72,37 @@ func main() {
 			fmt.Printf("Successfully changed directory to %s\n", getCurrentDir())
 			fmt.Println("Welcome home!")
 
+		case "lookaround", "ls": // A rather stupid ls implementation since it also lists entries which are hidden (starting with .) but good enough as a basic util.
+			targetDir := "./"
+			if len(formattedLine) > 1 {
+				targetDir += strings.TrimSpace(formattedLine[1])
+			}
+
+			entries, readingErr := os.ReadDir(targetDir)
+			if readingErr != nil {
+				fmt.Println(readingErr.Error())
+				return
+			}
+
+			entryCount := 0
+			for _, entry := range(entries) {
+				entryType := ""
+				if entry.Type().IsDir() {
+					entryType += "Directory"
+				} else if entry.Type().IsRegular() {
+					entryType += "File"
+				} else {
+					entryType += "Misc"
+				}
+
+				fmt.Printf("-> %s (%s)\n", entry.Name(), entryType)
+				entryCount++
+			}
+
+			if entryCount == 0 {
+				fmt.Println("Empty directory.")
+			}
+
 		case "clear", "clearscreen", "clr":
 			fmt.Print("\033[H\033[2J\033[3J") // ANSI Escape Code for clearing screen and scrollback buffer
 

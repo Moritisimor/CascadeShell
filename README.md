@@ -9,6 +9,14 @@ Like with virtually any other project out there, CλSH has its issues too. These
 
 - Ctrl + C does not work, or rather, it does, but will quit the shell, not the currently running program.
 
+## Planned features
+While this project does not have a strict roadmap or something along those lines, features may always be planned!
+
+- Add Ctrl + C support
+- Add a .cashrc 
+- Add persistent memory in form of a history file
+- Add some colors (not super important, but makes the shell less bland.)
+
 ## Commands
 Unlike with many other shells, CλSH Talks a lot and will inform the user of success or failure. This is an intentional design choice and serves to help the average user. 
 
