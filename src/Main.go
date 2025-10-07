@@ -34,6 +34,12 @@ func main() {
 	}
 	// !----------- Stop Gathering environment variables -----------! \\
 
+	// !----------- Start Quick ad -----------! \\
+	fmt.Print("<|------------------------------------ (INFO) ------------------------------------|>\n" + 
+			  "Shell made by Moritisimor. GitHub Repo: https://github.com/Moritisimor/CascadeShell.\n" +
+			  "<|------------------------------------ (INFO) ------------------------------------|>\n\n")
+	// !----------- Stop Quick ad -----------! \\
+
 	// !----------- Start REPL -----------! \\
 	reader := bufio.NewReader(os.Stdin)
 	for {
@@ -94,7 +100,7 @@ func main() {
 
 		case "readfile":
 			if len(formattedLine) < 2 {
-				fmt.Println("Illegal Argument Count! To use readfile you must specify the name of the file you want to read." + 
+				fmt.Println("Illegal Argument Count! To use readfile you must specify the name of the file you want to read.\n" + 
 							"Example: readfile hello.txt")
 				return
 			}
@@ -102,7 +108,7 @@ func main() {
 
 		case "removefile":
 			if len(formattedLine) < 2 {
-				fmt.Println("Illegal Argument Count! To use removefile you must specify the name of the file you want to remove." + 
+				fmt.Println("Illegal Argument Count! To use removefile you must specify the name of the file you want to remove.\n" + 
 							"Example: removefile hello.txt")
 				return
 			}
@@ -111,7 +117,7 @@ func main() {
 		case "gohome":
 			dirops.Chdir(userHome)
 
-		case "exit", "quit":
+		case "exit", "quit", "bye":
 			fmt.Println("Bye!")
 			os.Exit(0)
 

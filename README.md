@@ -106,4 +106,6 @@ Exit
 ```
 This command will break the Read-Eval-Print-Loop, effectively terminating the running CλSH Process and exiting the program.
 
+Valid Mnemonics include ```quit```, ```bye``` and ```exit```
+
 ###### Note: The list of Commands is always subject to change as this project is WIP.
