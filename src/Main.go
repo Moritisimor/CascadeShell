@@ -58,8 +58,21 @@ func main() {
 			cmd.Stdout = os.Stdout
 			cmd.Stderr = os.Stderr
 			cmd.Stdin = os.Stdin
-			if err := cmd.Run(); err != nil {
+			if cmd.Run() != nil {
 				fmt.Printf("Unknown command: %s\n", formattedLine[0])
+			} else {
+				fmt.Printf("Command %s executed successfully.\n", formattedLine[0])
+			}
+
+		case "run", "exec":
+			cmd := exec.Command(formattedLine[1], formattedLine[2:]...)
+			cmd.Stdout = os.Stdout
+			cmd.Stderr = os.Stderr
+			cmd.Stdin = os.Stdin
+			if cmd.Run() != nil {
+				fmt.Printf("Unknown program: %s\n", formattedLine[1])
+			} else {
+				fmt.Printf("Command %s executed successfully.\n", formattedLine[1])
 			}
 
 		case "lookaround", "ls":

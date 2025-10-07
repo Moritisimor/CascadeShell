@@ -26,13 +26,21 @@ CλSH also uses mnemonics, built-in aliases if you will, making commands have se
 
 Commands have no other valid mnemonics unless explicitly specified.
 
+### Run
+```Console
+Run <Program> <Program-specific parameters...>
+```
+This command will run the specified program, ignoring built-in commands and opting for OS-specific programs instead.
+
+Valid Mnemonics include 
+
 ### Chdir
 ```Console
 Chdir <Destination>
 ```
 This command will change the current directory to the target, telling the user if all went right, or if something failed.
 
-Valid Mnemonics include ```Changedirectory```, ```Chdir``` and ```Changedir```.
+Valid Mnemonics include ```Changedirectory``` and ```Changedir```.
 
 ### Makedir
 ```Console
@@ -40,7 +48,7 @@ Mkdir <Target>
 ```
 This command will create a folder with the specified name at the specified target.
 
-Valid Mnemonics Include ```Makedirectory```, ```Mkdir``` and ```Makedir```
+Valid Mnemonics Include ```Makedirectory``` and ```Mkdir```
 
 ### Gohome
 ```Console
@@ -107,7 +115,7 @@ Print <Content>
 ```
 This command will print the specified Content to the console.
 
-Valid Mnemonics include ```Echo```, ```Say``` and ```Print```.
+Valid Mnemonics include ```Echo``` and ```Say```
 
 ### Exit
 ```Console
@@ -115,6 +123,6 @@ Exit
 ```
 This command will break the Read-Eval-Print-Loop, effectively terminating the running CλSH Process and exiting the program.
 
-Valid Mnemonics include ```quit```, ```bye``` and ```exit```
+Valid Mnemonics include ```quit``` and ```bye```
 
 ###### Note: The list of Commands is always subject to change as this project is WIP.
