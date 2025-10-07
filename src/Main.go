@@ -76,6 +76,14 @@ func main() {
 			}
 			currentDir = dirops.Pwd()
 
+		case "mkdir", "makedirectory", "makedir":
+			if len(formattedLine) == 1 {
+				fmt.Println("Illegal argument count! mkdir requires one following argument, specifying the directory name.\n" + 
+							"Example: mdkir ExampleFolder")
+			} else {
+				dirops.Makedir(formattedLine[1])
+			}
+
 		case "makefile":
 			if len(formattedLine) < 2 {
 				fmt.Println("Illegal Argument Count! To use makefile you must specify the name of the file you want to create." + 

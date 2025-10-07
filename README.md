@@ -35,6 +35,14 @@ This command will change the current directory to the target, telling the user i
 
 Valid Mnemonics include ```Changedirectory```, ```Chdir``` and ```Changedir```.
 
+### Makedir
+```Console
+Mkdir <Target>
+```
+This command will create a folder with the specified name at the specified target.
+
+Valid Mnemonics Include ```Makedirectory```, ```Mkdir``` and ```Makedir```
+
 ### Gohome
 ```Console
 Gohome
