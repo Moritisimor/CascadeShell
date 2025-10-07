@@ -14,7 +14,6 @@ Designed to be highly user-friendly and portable, this Shell is really made for 
 ## Known issues
 Like with virtually any other project out there, CλSH has its issues too. These include, but not are limited to:
 
-- Using lookaround on directories will not work
 - Readfile is not always very reliable and sometimes does not read a file.
 - The ```--showhidden``` flag for lookaround does not work.
 
@@ -62,11 +61,15 @@ Lookaround <Target>
 ```
 This command will show the subdirectories and files of a given Target directory. If no target is given, it will use the current directory.
 
+The only valid Mnemonic is ```ls```
+
 ### Whereami
 ```Console
 Whereami
 ```
 This command will print where you currently are in the Filesystem as the absolute path.
+
+The only valid Mnemonic is ```pwd```
 
 ### Makefile
 ```Console
@@ -74,11 +77,15 @@ Makefile <Target>
 ```
 This command will create a new, empty File at the specified Target.
 
+The only valid Mnemonic is ```touch```
+
 ### Readfile
 ```Console
 Readfile <Target>
 ```
 This command will read the contents of the specified file and print it to the console.
+
+The only valid Mnemonic is ```cat```
 
 ### Writefile
 ```Console
@@ -91,6 +98,8 @@ This command will write the specified content to the specified file.
 Removefile <Target>
 ```
 This command will remove the specified file.
+
+The only valid Mnemonic is ```rm```
 
 ### Print
 ```Console

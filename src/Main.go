@@ -36,7 +36,7 @@ func main() {
 	// !----------- Stop Gathering environment variables -----------! \\
 
 	// !----------- Start Quick ad -----------! \\
-	fmt.Print("<|------------------------------------ (INFO) ------------------------------------|>\n" + 
+	fmt.Print("<|------------------------------------ (INFO) ------------------------------------|>\n" +
 			  "Shell made by Moritisimor. GitHub Repo: https://github.com/Moritisimor/CascadeShell.\n" +
 			  "<|------------------------------------ (INFO) ------------------------------------|>\n\n")
 	// !----------- Stop Quick ad -----------! \\
@@ -62,61 +62,61 @@ func main() {
 				fmt.Printf("Unknown command: %s\n", formattedLine[0])
 			}
 
-		case "lookaround":
+		case "lookaround", "ls":
 			showHidden := false
 			if strings.Contains(rawLine, "--showhidden") {
 				showHidden = true
 			}
-			
+
 			if len(formattedLine) == 1 {
 				dirops.Lookaround("", showHidden) // An empty string means the current directory.
 			} else {
 				dirops.Lookaround(formattedLine[1], showHidden)
 			}
 
-		case "whereami":
+		case "whereami", "pwd":
 			dirops.Whereami()
 
-		case "chdir", "changedir", "changedirectory":
-			if len(formattedLine) == 1 {
+		case "chdir", "changedir", "changedirectory", "cd":
+    		if len(formattedLine) < 2 {
 				dirops.Chdir(userHome)
 			} else {
 				dirops.Chdir(formattedLine[1])
-			}
 
-			if formattedLine[1] == "/" {
-				fmt.Println("Be careful when you're in the root directory!")
+				if formattedLine[1] == "/" {
+					fmt.Println("Be careful when you're in the root directory!")
+				}
 			}
-			currentDir = dirops.Pwd()
+    		currentDir = dirops.Pwd()
 
 		case "mkdir", "makedirectory", "makedir":
 			if len(formattedLine) == 1 {
-				fmt.Println("Illegal argument count! mkdir requires one following argument, specifying the directory name.\n" + 
-							"Example: mdkir ExampleFolder")
+				fmt.Println("Illegal argument count! mkdir requires one following argument, specifying the directory name.\n" +
+					"Example: mdkir ExampleFolder")
 			} else {
 				dirops.Makedir(formattedLine[1])
 			}
 
-		case "makefile":
+		case "makefile", "touch":
 			if len(formattedLine) < 2 {
-				fmt.Println("Illegal Argument Count! To use makefile you must specify the name of the file you want to create." + 
-							"Example: makefile hello.txt")
+				fmt.Println("Illegal Argument Count! To use makefile you must specify the name of the file you want to create." +
+					"Example: makefile hello.txt")
 				return
 			}
 			fileops.Makefile(formattedLine[1])
 
-		case "readfile":
+		case "readfile", "cat":
 			if len(formattedLine) < 2 {
-				fmt.Println("Illegal Argument Count! To use readfile you must specify the name of the file you want to read.\n" + 
-							"Example: readfile hello.txt")
+				fmt.Println("Illegal Argument Count! To use readfile you must specify the name of the file you want to read.\n" +
+					"Example: readfile hello.txt")
 				return
 			}
 			fileops.Readfile(formattedLine[1])
 
-		case "removefile":
+		case "removefile", "rm":
 			if len(formattedLine) < 2 {
-				fmt.Println("Illegal Argument Count! To use removefile you must specify the name of the file you want to remove.\n" + 
-							"Example: removefile hello.txt")
+				fmt.Println("Illegal Argument Count! To use removefile you must specify the name of the file you want to remove.\n" +
+					"Example: removefile hello.txt")
 				return
 			}
 			fileops.Removefile(formattedLine[1])
@@ -124,7 +124,7 @@ func main() {
 		case "gohome":
 			dirops.Chdir(userHome)
 
-		case "clear":
+		case "clear", "clearscreen", "clr":
 			fmt.Print("\033[H\033[2J\033[3J") // ANSI Escape Code for clearing screen and scrollback buffer
 
 		case "exit", "quit", "bye":
@@ -133,7 +133,7 @@ func main() {
 
 		case "print", "say", "echo":
 			printBuf := ""
-			for _, i := range(formattedLine[1:]) {
+			for _, i := range formattedLine[1:] {
 				printBuf += i + " "
 			}
 			fmt.Printf("%s\n", printBuf)
