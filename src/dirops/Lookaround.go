@@ -10,7 +10,7 @@ func Lookaround(dirName string, showhidden bool) {
 	dirs, err := os.ReadDir("./" + dirName)
 
 	if err != nil {
-		fmt.Printf("Something went while reading the entries of %s. Make sure %s is a folder and exists.\n", dirName, dirName)
+		fmt.Println(err.Error())
 		return
 	}
 
