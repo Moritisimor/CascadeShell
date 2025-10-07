@@ -113,7 +113,7 @@ func main() {
 			fmt.Println("Bye!")
 			os.Exit(0)
 
-		case "print", "say", "echo":
+		case "print", "say":
 			printBuf := ""
 			for _, i := range formattedLine[1:] {
 				printBuf += i + " "

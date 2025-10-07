@@ -65,7 +65,7 @@ print <Content>
 ```
 This command will print the specified Content to the console.
 
-Valid variations include ```echo``` and ```say```.
+The only alid variation of this command is ```say```.
 
 ### Exit
 ```Console
