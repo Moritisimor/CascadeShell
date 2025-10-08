@@ -30,6 +30,14 @@ func main() {
 		os.Exit(1)
 	}
 
+	defVars := map[string]string {
+		"@shell": 	"cash",
+		"@user":  	currentUser.Name,
+		"@userID":	currentUser.Uid,
+		"@host":	currentHost,
+		"@home":	userHome,
+	}
+
 	fmt.Print("<|------------------------------------ (INFO) ------------------------------------|>\n" +
 			  "Shell made by Moritisimor. GitHub Repo: https://github.com/Moritisimor/CascadeShell.\n" +
 			  "<|------------------------------------ (INFO) ------------------------------------|>\n\n")
@@ -72,9 +80,25 @@ func main() {
 			fmt.Printf("Successfully changed directory to %s\n", getCurrentDir())
 			fmt.Println("Welcome home!")
 
+		case "let":
+			if len(formattedLine) < 3 {
+				fmt.Println("Illegal argument count! Let requires 2 arguments!" + 
+							"\nExample Usage: let greeting hello")
+				
+			} else {
+				trueVar := ""
+				if strings.HasPrefix(formattedLine[1], "@") {
+					trueVar = formattedLine[1]
+				} else {
+					trueVar = "@" + formattedLine[1]
+				}
+
+				defVars[trueVar] = formattedLine[2]
+			}
+
 		case "lookaround", "ls": // A rather stupid ls implementation since it also lists entries which are hidden (starting with .) but good enough as a basic util.
 			targetDir := "./"
-			if len(formattedLine) > 1 {
+			if len(formattedLine) < 1 {
 				targetDir += strings.TrimSpace(formattedLine[1])
 			}
 
@@ -114,11 +138,22 @@ func main() {
 			os.Exit(0)
 
 		case "print", "say":
-			printBuf := ""
-			for _, i := range formattedLine[1:] {
-				printBuf += i + " "
+			if len(formattedLine) < 2 {
+				fmt.Printf("Illegal argument count! %s requires at least 1 argument.", formattedLine[0] + 
+							"\nExample usage: print hello" + 
+							"\nTo access declared variables, put an '@' before it." + 
+							"\nExample usage: print @shell")
+			} else {
+				printBuf := ""
+				for _, i := range formattedLine[1:] {
+					if defVars[i] != "" {
+						printBuf += defVars[i]
+					} else {
+						printBuf += i + " "
+					}
+				}
+				fmt.Printf("%s\n", printBuf)
 			}
-			fmt.Printf("%s\n", printBuf)
 
 		case "":
 			// Do nothing.

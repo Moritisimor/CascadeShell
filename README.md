@@ -45,6 +45,12 @@ This command will print the current directory as an absolute path.
 
 The only valid variation of this command is ```pwd```
 
+### Let
+```Console
+let greeting hello
+```
+This command will create a new variable in-memory with the specified name. To access it you put an '@' symbol before the actual name. Base variables like ```@shell```, ```@user```, ```@userID``` and ```@host``` are initialized along with the shell.
+
 ### Clear
 ```console
 clear
@@ -63,7 +69,7 @@ This command will take the user to their home directory.
 ```Console
 print <Content>
 ```
-This command will print the specified Content to the console.
+This command will print the specified Content to the console. Can also be used to print variables by putting an '@' symbol before the variable name.
 
 The only valid variation of this command is ```say```.
 
