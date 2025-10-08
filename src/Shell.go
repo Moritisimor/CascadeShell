@@ -93,7 +93,12 @@ func main() {
 					trueVar = "@" + formattedLine[1]
 				}
 
-				defVars[trueVar] = formattedLine[2]
+				if formattedLine[2] != "=" {
+					defVars[trueVar] = strings.Join(formattedLine[2:], " ")
+				} else {
+					defVars[trueVar] = strings.Join(formattedLine[3:], " ")
+				}
+				fmt.Printf("Variable %s declared successfully.\n", trueVar)
 			}
 
 		case "lookaround", "ls": // A rather stupid ls implementation since it also lists entries which are hidden (starting with .) but good enough as a basic util.
@@ -147,7 +152,7 @@ func main() {
 				printBuf := ""
 				for _, i := range formattedLine[1:] {
 					if defVars[i] != "" {
-						printBuf += defVars[i]
+						printBuf += defVars[i] + " "
 					} else {
 						printBuf += i + " "
 					}
