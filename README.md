@@ -51,6 +51,12 @@ let greeting hello
 ```
 This command will create a new variable in-memory with the specified name. To access it you put an '@' symbol before the actual name. Base variables like ```@shell```, ```@user```, ```@userID``` and ```@host``` are initialized along with the shell.
 
+### Unlet
+```Console
+unlet greeting
+```
+This command will uninitialize a variable. However, internally, the memory won't be freed, the value will simply be set to 'nil' to mark the variable as uninitialized for the shell internally.
+
 ### Clear
 ```console
 clear

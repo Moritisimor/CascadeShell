@@ -82,9 +82,8 @@ func main() {
 
 		case "let":
 			if len(formattedLine) < 3 {
-				fmt.Println("Illegal argument count! Let requires 2 arguments!" + 
+				fmt.Println("Illegal argument count! Let requires at least 2 arguments!" + 
 							"\nExample Usage: let greeting hello")
-				
 			} else {
 				trueVar := ""
 				if strings.HasPrefix(formattedLine[1], "@") {
@@ -93,12 +92,31 @@ func main() {
 					trueVar = "@" + formattedLine[1]
 				}
 
-				if formattedLine[2] != "=" {
-					defVars[trueVar] = strings.Join(formattedLine[2:], " ")
-				} else {
-					defVars[trueVar] = strings.Join(formattedLine[3:], " ")
+				starter := 2
+				if formattedLine[2] == "=" {
+					starter = 3
 				}
+
+				defVars[trueVar] = strings.Join(formattedLine[starter:], " ")
 				fmt.Printf("Variable %s declared successfully.\n", trueVar)
+			}
+
+		case "unlet": // This implementation of undeclaring a variable is more convention-based than anything else, but good enough.
+			if len(formattedLine) < 2 {
+				fmt.Println("Illegal argument count! Unlet requires at least 2 arguments!" + 
+							"\nExample usage: unlet hello")
+			} else {
+				trueVar := formattedLine[1]
+				if !strings.HasPrefix(trueVar, "@") {
+					trueVar = "@" + trueVar
+				}
+
+				if defVars[trueVar] == "" || defVars[trueVar] == "nil" {
+					fmt.Printf("%s is already uninitialized.\n", trueVar)
+				} else {
+					defVars[trueVar] = "nil"
+					fmt.Printf("%s uninitialized successfully.\n", trueVar)
+				}
 			}
 
 		case "lookaround", "ls": // A rather stupid ls implementation since it also lists entries which are hidden (starting with .) but good enough as a basic util.
@@ -151,7 +169,7 @@ func main() {
 			} else {
 				printBuf := ""
 				for _, i := range formattedLine[1:] {
-					if defVars[i] != "" {
+					if defVars[i] != "" && defVars[i] != "nil" {
 						printBuf += defVars[i] + " "
 					} else {
 						printBuf += i + " "
