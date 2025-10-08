@@ -31,11 +31,12 @@ func main() {
 	}
 
 	defVars := map[string]string {
-		"@shell": 	"cash",
-		"@user":  	currentUser.Name,
-		"@userID":	currentUser.Uid,
-		"@host":	currentHost,
-		"@home":	userHome,
+		"@shell": 		"cash",
+		"@user":  		currentUser.Name,
+		"@userID":		currentUser.Uid,
+		"@host":		currentHost,
+		"@home":		userHome,
+		"@lastcommand": "nil",
 	}
 
 	fmt.Print("<|------------------------------------ (INFO) ------------------------------------|>\n" +
@@ -112,9 +113,9 @@ func main() {
 				}
 
 				if defVars[trueVar] == "" || defVars[trueVar] == "nil" {
-					fmt.Printf("%s is already uninitialized.\n", trueVar)
+					fmt.Printf("%s does not exist.\n", trueVar)
 				} else {
-					defVars[trueVar] = "nil"
+					delete(defVars, trueVar)
 					fmt.Printf("%s uninitialized successfully.\n", trueVar)
 				}
 			}
@@ -181,5 +182,6 @@ func main() {
 		case "":
 			// Do nothing.
 		}
+		defVars["@lastcommand"] = strings.Join(formattedLine[0:], " ")
 	}
 }
