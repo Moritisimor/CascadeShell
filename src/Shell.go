@@ -36,7 +36,7 @@ func main() {
 		"@userID":		currentUser.Uid,
 		"@host":		currentHost,
 		"@home":		userHome,
-		"@lastcommand": "nil",
+		"@lastcommand": "undefined",
 	}
 
 	fmt.Print("<|------------------------------------ (INFO) ------------------------------------|>\n" +
@@ -67,14 +67,17 @@ func main() {
 				fmt.Printf("Command %s executed successfully.\n", formattedLine[0])
 			}
 
-		case "cd", "changedir", "changedirectory":
+		case "cd", "chdir":
 			if len(formattedLine) < 2 {
 				fmt.Printf("Illegal argument count! %s requires 1 argument.\nExample: %s ExampleTargetDirectory\n", formattedLine[1], formattedLine[1])
 				return
 			}
 			
-			os.Chdir(formattedLine[1])
-			fmt.Printf("Successfully changed directory to %s\n", getCurrentDir())
+			cdErr := os.Chdir(formattedLine[1]); if cdErr != nil {
+				fmt.Println(cdErr.Error())
+			} else {
+				fmt.Printf("Successfully changed directory to %s\n", getCurrentDir())
+			}
 
 		case "gohome":
 			os.Chdir(userHome)
@@ -170,7 +173,7 @@ func main() {
 			} else {
 				printBuf := ""
 				for _, i := range formattedLine[1:] {
-					if defVars[i] != "" && defVars[i] != "nil" {
+					if defVars[i] != "" {
 						printBuf += defVars[i] + " "
 					} else {
 						printBuf += i + " "
