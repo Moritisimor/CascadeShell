@@ -7,12 +7,12 @@ This project is a shell entirely written in go. It is designed to be portable, s
 ## Known issues
 Like with virtually any other project out there, CλSH has its issues too. These include, but are not limited to:
 
-- Ctrl + C does not work, or rather, it does, but will quit the shell, not the currently running program.
+- Ctrl + C may be buggy.
+- Uparrow for pasting the last command into the prompt does not work. (Or rather is not implemented yet.)
 
 ## Planned features
 While this project does not have a strict roadmap or something along those lines, features may always be planned for the future! Current plans include:
 
-- Add Ctrl + C support
 - Add a .cashrc 
 - Add persistent memory in form of a history file
 - Add some colors (not super important, but makes the shell less bland.)

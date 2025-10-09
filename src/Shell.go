@@ -6,12 +6,17 @@ import (
 	"os"
 	"os/exec"
 	"os/user"
+	"os/signal"
 	"strings"
 )
 
 func getCurrentDir() string {
 	currentDir, _ := os.Getwd()
 	return currentDir
+}
+
+func flipBool(flipee *bool) {
+	*flipee = !*flipee
 }
 
 func main() {
@@ -39,6 +44,21 @@ func main() {
 		"@lastcommand": "undefined",
 	}
 
+	activeProcess := false
+
+	sigTermWatcher := make(chan os.Signal, 1)
+		signal.Notify(sigTermWatcher, os.Interrupt) 
+		go func() {
+			for range(sigTermWatcher) {
+				if activeProcess {
+					fmt.Println("\nGot sigterm, quitting current process...")
+					break
+				} else {
+					fmt.Printf("\n( %s@%s#%s ) -> ", currentUser.Username, currentHost, getCurrentDir())
+				}
+			} 
+		}()
+
 	fmt.Print("<|------------------------------------ (INFO) ------------------------------------|>\n" +
 			  "Shell made by Moritisimor. GitHub Repo: https://github.com/Moritisimor/CascadeShell.\n" +
 			  "<|------------------------------------ (INFO) ------------------------------------|>\n\n")
@@ -60,12 +80,15 @@ func main() {
 			cmd.Stderr = os.Stderr
 			cmd.Stdin = os.Stdin
 			runErr:= cmd.Run()
+			flipBool(&activeProcess)
 
 			if runErr != nil {
 				fmt.Println(runErr.Error())
 			} else {
 				fmt.Printf("Command %s executed successfully.\n", formattedLine[0])
 			}
+
+			flipBool(&activeProcess)
 
 		case "cd", "chdir":
 			if len(formattedLine) < 2 {
