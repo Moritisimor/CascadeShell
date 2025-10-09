@@ -190,14 +190,18 @@ func main() {
 		case "print", "say":
 			if len(formattedLine) < 2 {
 				fmt.Printf("Illegal argument count! %s requires at least 1 argument.", formattedLine[0] + 
-							"\nExample usage: print hello" + 
-							"\nTo access declared variables, put an '@' before it." + 
-							"\nExample usage: print @shell")
+						   "\nExample usage: print hello" + 
+						   "\nTo access declared variables, put an '@' before it." + 
+						   "\nExample usage: print @shell")
 			} else {
 				printBuf := ""
 				for _, i := range formattedLine[1:] {
-					if defVars[i] != "" {
-						printBuf += defVars[i] + " "
+					if strings.HasPrefix(i, "@") {
+						if defVars[i] != "" {
+							printBuf += defVars[i]
+						} else {
+							printBuf = "Unknown variable: " + i
+						}
 					} else {
 						printBuf += i + " "
 					}
