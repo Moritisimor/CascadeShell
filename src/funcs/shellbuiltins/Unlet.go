@@ -1,14 +1,15 @@
 package shellbuiltins
 
 import (
-	"strings"
+	"CaSh/funcs/color"
 	"fmt"
+	"strings"
 )
 
 func Unlet(funcArgs []string, symbolTable map[string]string) {
 	if len(funcArgs) < 2 {
-		fmt.Println("Illegal argument count! Unlet requires at least 2 arguments!" + 
-					"\nExample usage: unlet hello")
+		color.PrintRedln(fmt.Sprintf("Illegal argument count! %s requires 1 argument!", funcArgs[0]))
+		color.PrintBlueln(fmt.Sprintf("Example usage: %s @hello", funcArgs[0]))
 
 		return
 	} 
@@ -17,10 +18,14 @@ func Unlet(funcArgs []string, symbolTable map[string]string) {
 	if !strings.HasPrefix(trueVar, "@") {
 		trueVar = "@" + trueVar
 	}
+
 	if symbolTable[trueVar] == "" || symbolTable[trueVar] == "nil" {
-		fmt.Printf("%s does not exist.\n", trueVar)
-	} else {
-		delete(symbolTable, trueVar)
-		fmt.Printf("%s uninitialized successfully.\n", trueVar)
+		color.PrintMagenta(trueVar)
+		color.PrintRedln(" does not exist.")
+		return
 	}
+
+	delete(symbolTable, trueVar)
+	color.PrintMagenta(trueVar)
+	color.PrintGreenln(" has been uninitialized successfully.")
 }

@@ -1,20 +1,23 @@
 package shellbuiltins
 
 import (
+	"CaSh/funcs/color"
+	"CaSh/funcs/smallhelpers"
 	"fmt"
 	"os"
-	"CaSh/funcs/smallhelpers"
 )
 
 func Chdir(funcArgs []string) {
 	if len(funcArgs) < 2 {
-		fmt.Printf("Illegal argument count! %s requires 1 argument.\nExample: %s ExampleTargetDirectory\n", funcArgs[1], funcArgs[1])
+		color.PrintRedln(fmt.Sprintf("Illegal argument count! %s requires 1 argument.", funcArgs[0]))
+		color.PrintBlueln(fmt.Sprintf("Example: %s ExampleTargetDirectory", funcArgs[0]))
 		return
 	}
 			
 	cdErr := os.Chdir(funcArgs[1]); if cdErr != nil {
-		fmt.Println(cdErr.Error())
+		color.PrintRedln(cdErr.Error())
 	} else {
-		fmt.Printf("Successfully changed directory to %s\n", smallhelpers.GetCurrentDir())
+		color.PrintGreen("Successfully changed directory to ")
+		color.PrintYellowln(smallhelpers.GetCurrentDir())
 	}
 }

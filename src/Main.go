@@ -1,6 +1,7 @@
 package main
 
 import (
+	"CaSh/funcs/color"
 	"CaSh/funcs/envvargatherers"
 	"CaSh/funcs/shellbuiltins"
 	"CaSh/funcs/smallhelpers"
@@ -15,8 +16,6 @@ func main() {
 	currentUser := envvargatherers.GetUser()
 	currentHost := envvargatherers.GetHome()
 	userHome := currentUser.HomeDir
-	
-
 	os.Chdir(userHome)
 
 	defVars := map[string]string {
@@ -38,21 +37,22 @@ func main() {
 					fmt.Println("\nGot sigterm, quitting current process...")
 					break
 				} else {
-					fmt.Printf("\n( %s@%s#%s ) -> ", currentUser.Username, currentHost, smallhelpers.GetCurrentDir())
+					fmt.Println()
+					smallhelpers.Drawprompt(currentUser.Username, currentHost, smallhelpers.GetCurrentDir())
 				}
 			} 
 		}()
 
-	fmt.Print("<|------------------------------------ (INFO) ------------------------------------|>\n" +
-			  "Shell made by Moritisimor. GitHub Repo: https://github.com/Moritisimor/CascadeShell.\n" +
-			  "<|------------------------------------ (INFO) ------------------------------------|>\n\n")
+	color.PrintGreenln("<|------------------------------------ (INFO) ------------------------------------|>")
+	color.PrintBlueln("Shell made by Moritisimor. GitHub Repo: https://github.com/Moritisimor/CascadeShell.")
+	color.PrintGreenln("<|------------------------------------ (INFO) ------------------------------------|>\n")
 
 	reader := bufio.NewReader(os.Stdin)
 	for {
-		fmt.Printf("( %s@%s#%s ) -> ", currentUser.Username, currentHost, smallhelpers.GetCurrentDir())
+		smallhelpers.Drawprompt(currentUser.Username, currentHost, smallhelpers.GetCurrentDir())
 		rawLine, readingErr := reader.ReadString('\n')
 		if readingErr != nil {
-			fmt.Printf("FATAL! Reading Line failed! Exiting...\nError: %s", readingErr.Error())
+			color.PrintRed(fmt.Sprintf("FATAL! Reading Line failed! Exiting...\nError: %s", readingErr.Error()))
 			os.Exit(2)
 		}
 
@@ -66,26 +66,27 @@ func main() {
 
 		case "gohome":
 			os.Chdir(userHome)
-			fmt.Printf("Successfully changed directory to %s\n", smallhelpers.GetCurrentDir())
-			fmt.Println("Welcome home!")
+			color.PrintGreenln(fmt.Sprintf("Successfully changed directory to %s", smallhelpers.GetCurrentDir()))
+			color.PrintYellowln("Welcome home!")
 
-		case "let":
+		case "let", "var":
 			shellbuiltins.Let(formattedLine, defVars)
 
-		case "unlet":
+		case "unlet", "free":
 			shellbuiltins.Unlet(formattedLine, defVars)
 
 		case "lookaround", "ls": // A rather stupid ls implementation since it also lists entries which are hidden (starting with .) but good enough as a basic util.
 			shellbuiltins.Lookaround(formattedLine)
 
 		case "whereami", "pwd":
-			fmt.Printf("You are in: %s\n", smallhelpers.GetCurrentDir())
+			color.PrintBlue("You are in: ")
+			color.PrintYellowln(smallhelpers.GetCurrentDir())
 
 		case "clear", "clearscreen", "clr":
 			fmt.Print("\033[H\033[2J\033[3J") // ANSI Escape Code for clearing screen and scrollback buffer
 
 		case "exit", "quit", "bye":
-			fmt.Println("Bye!")
+			color.PrintBlueln("Bye!")
 			os.Exit(0)
 
 		case "print", "say":

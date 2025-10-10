@@ -1,10 +1,11 @@
 package shellbuiltins
 
 import (
+	"CaSh/funcs/color"
+	"CaSh/funcs/smallhelpers"
 	"fmt"
 	"os"
 	"os/exec"
-	"CaSh/funcs/smallhelpers"
 )
 
 func Execute(funcArgs []string, processFlag *bool) {
@@ -13,10 +14,10 @@ func Execute(funcArgs []string, processFlag *bool) {
 	cmd.Stderr = os.Stderr
 	cmd.Stdin = os.Stdin
 	runErr:= cmd.Run()
-	smallhelpers.FlipBool(processFlag)
+	smallhelpers.FlipBool(processFlag) // Mark process as running
 
 	if runErr != nil {
-		fmt.Println(runErr.Error())
+		color.PrintRedln(runErr.Error())
 	} else {
 		fmt.Printf("Command %s executed successfully.\n", funcArgs[0])
 	}

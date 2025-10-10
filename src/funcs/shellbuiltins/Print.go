@@ -1,18 +1,17 @@
 package shellbuiltins
 
 import (
+	"CaSh/funcs/color"
 	"fmt"
 	"strings"
 )
 
 func Say(funcArgs []string, symbolTable map[string]string) {
 	if len(funcArgs) < 2 {
-		usedCommand := funcArgs[0]
-		fmt.Printf("Illegal argument count! %s requires at least 1 argument." + 
-				   "\nExample usage: %s hello" + 
-				   "\nTo access declared variables, put an '@' before it." + 
-				   "\nExample usage: %s @shell\n",
-				   usedCommand, usedCommand, usedCommand)
+		color.PrintRedln(fmt.Sprintf("Illegal argument count! %s requires at least 1 argument.", funcArgs[0]))
+		color.PrintBlueln(fmt.Sprintf("Example usage: %s hello", funcArgs[0]))
+		color.PrintGreenln("To access declared variables, put an '@' before it.")
+		color.PrintBlueln(fmt.Sprintf("Example usage: %s @shell", funcArgs[0]))
 
 		return
 	}

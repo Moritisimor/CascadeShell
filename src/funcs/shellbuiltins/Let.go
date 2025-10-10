@@ -1,14 +1,15 @@
 package shellbuiltins
 
 import (
+	"CaSh/funcs/color"
 	"fmt"
 	"strings"
 )
 
 func Let(funcArgs []string, symbolTable map[string]string) {
 	if len(funcArgs) < 3 {
-				fmt.Println("Illegal argument count! Let requires at least 2 arguments!" + 
-							"\nExample Usage: let greeting hello")
+		color.PrintRedln(fmt.Sprintf("Illegal argument count! %s requires at least 2 arguments!", funcArgs[0]))
+		color.PrintBlueln(fmt.Sprintf("Example Usage: %s greeting = hello", funcArgs[0]))
 
 		return
 	}
@@ -25,5 +26,5 @@ func Let(funcArgs []string, symbolTable map[string]string) {
 		}
 
 		symbolTable[trueVar] = strings.Join(funcArgs[starter:], " ")
-		fmt.Printf("Variable %s declared successfully.\n", trueVar)
+		color.PrintGreenln(fmt.Sprintf("Variable %s declared successfully.", trueVar))
 }

@@ -1,9 +1,9 @@
 package shellbuiltins
 
 import (
-	"fmt"
-	"strings"
+	"CaSh/funcs/color"
 	"os"
+	"strings"
 )
 
 func Lookaround(funcArgs []string) {
@@ -14,7 +14,7 @@ func Lookaround(funcArgs []string) {
 
 	entries, readingErr := os.ReadDir(targetDir)
 	if readingErr != nil {
-		fmt.Println(readingErr.Error())
+		color.PrintRedln(readingErr.Error())
 		return
 	}
 
@@ -29,11 +29,22 @@ func Lookaround(funcArgs []string) {
 			entryType += "Misc"
 		}
 
-		fmt.Printf("-> %s (%s)\n", entry.Name(), entryType)
+		color.PrintBlue("-> ")
+		color.PrintYellow(entry.Name())
+		color.PrintBlue(" (")
+		switch entryType { // Perhaps not the most efficient, but it'll do for now.
+		default:
+			color.PrintMagenta(entryType)
+		case "File":
+			color.PrintGreen(entryType)
+		case "Directory":
+			color.PrintRed(entryType)
+		}
+		color.PrintBlueln(")")
 		entryCount++
 	}
 
 	if entryCount == 0 {
-		fmt.Println("Empty directory.")
+		color.PrintBlueln("Empty directory.")
 	}
 }
