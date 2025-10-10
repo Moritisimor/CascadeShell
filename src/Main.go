@@ -5,10 +5,10 @@ import (
 	"CaSh/funcs/envvargatherers"
 	"CaSh/funcs/shellbuiltins"
 	"CaSh/funcs/smallhelpers"
+	"CaSh/sigwatchers"
 	"bufio"
 	"fmt"
 	"os"
-	"os/signal"
 	"strings"
 )
 
@@ -28,20 +28,7 @@ func main() {
 	}
 
 	activeProcess := false
-
-	sigTermWatcher := make(chan os.Signal, 1)
-	signal.Notify(sigTermWatcher, os.Interrupt) 
-	go func() {
-		for range(sigTermWatcher) {
-			if activeProcess {
-				fmt.Println("\nGot sigterm, quitting current process...")
-				break
-			} else {
-				fmt.Println()
-				smallhelpers.Drawprompt(currentUser.Username, currentHost, smallhelpers.GetCurrentDir())
-			}
-		} 
-	}()
+	sigwatchers.StartSigTermWatcher(&activeProcess, currentUser.Username, currentHost)
 
 	color.PrintGreenln("<|---------------------- (INFO) ----------------------|>")
 	color.PrintBlueln("GitHub Repo: https://github.com/Moritisimor/CascadeShell")
