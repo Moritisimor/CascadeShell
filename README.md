@@ -15,6 +15,7 @@ While this project does not have a strict roadmap or something along those lines
 
 - Add a .cashrc 
 - Add persistent memory in form of a history file
+- Implement command chaining functionality
 
 ## Commands
 Unlike with many other shells, CλSH talks a lot and will inform the user of success or failure. This is an intentional design choice and serves to help beginners or those who simply want a talkative shell. 
