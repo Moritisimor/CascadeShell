@@ -55,7 +55,7 @@ This command will create a new variable in-memory with the specified name. To ac
 ```Console
 unlet greeting
 ```
-This command will uninitialize a variable. However, internally, the memory won't be freed, the value will simply be set to 'nil' to mark the variable as uninitialized for the shell internally.
+This command will uninitialize a variable, deleting it from the internal map which stores variables.
 
 ### Clear
 ```console
