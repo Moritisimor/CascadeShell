@@ -26,7 +26,7 @@ CλSH has a few built-in commands, these include:
 ```Console
 chdir <Destination>
 ```
-This command will change the current directory to the target.
+This command will change the current directory to the target. Note that using just ```cd``` to go to the home directory will not work. Use ```gohome``` instead.
 
 The only valid variation of this command is ```cd```
 
@@ -45,6 +45,12 @@ This command will print the current directory as an absolute path.
 
 The only valid variation of this command is ```pwd```
 
+### Whoami
+```Console
+whoami
+```
+This command will print the current user to the console.
+
 ### Let
 ```Console
 let greeting hello
@@ -56,6 +62,8 @@ This command will create a new variable in-memory with the specified name. To ac
 unlet greeting
 ```
 This command will uninitialize a variable, deleting it from the internal map which stores variables.
+
+The only valid variation of this command is ```free```
 
 ### Clear
 ```console

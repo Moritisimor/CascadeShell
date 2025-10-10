@@ -43,9 +43,9 @@ func main() {
 		} 
 	}()
 
-	color.PrintGreenln("<|------------------------------------ (INFO) ------------------------------------|>")
-	color.PrintBlueln("Shell made by Moritisimor. GitHub Repo: https://github.com/Moritisimor/CascadeShell.")
-	color.PrintGreenln("<|------------------------------------ (INFO) ------------------------------------|>\n")
+	color.PrintGreenln("<|---------------------- (INFO) ----------------------|>")
+	color.PrintBlueln("GitHub Repo: https://github.com/Moritisimor/CascadeShell")
+	color.PrintGreenln("<|---------------------- (INFO) ----------------------|>\n")
 
 	reader := bufio.NewReader(os.Stdin)
 	for {
@@ -81,6 +81,10 @@ func main() {
 		case "whereami", "pwd":
 			color.PrintBlue("You are in: ")
 			color.PrintYellowln(smallhelpers.GetCurrentDir())
+
+		case "whoami":
+			color.PrintBlue("You are: ")
+			color.PrintGreenln(currentUser.Username)
 
 		case "clear", "clearscreen", "clr":
 			fmt.Print("\033[H\033[2J\033[3J") // ANSI Escape Code for clearing screen and scrollback buffer

@@ -14,13 +14,12 @@ func Execute(funcArgs []string, processFlag *bool) {
 	cmd.Stderr = os.Stderr
 	cmd.Stdin = os.Stdin
 	runErr:= cmd.Run()
-	smallhelpers.FlipBool(processFlag) // Mark process as running
+	smallhelpers.SetTrue(processFlag) // Mark process as running
+	defer smallhelpers.SetFalse(processFlag) // Mark as done at the end of the scope
 
 	if runErr != nil {
 		color.PrintRedln(runErr.Error())
 	} else {
-		fmt.Printf("Command %s executed successfully.\n", funcArgs[0])
+		color.PrintGreenln(fmt.Sprintf("Command %s executed successfully.\n", funcArgs[0]))
 	}
-
-	smallhelpers.FlipBool(processFlag)
 }
