@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-func GetHome() string {
+func GetHost() string {
 	currentHost, hostErr := os.Hostname()
 	if hostErr != nil {
 		fmt.Printf("Could not read OS Hostname!\nError: %e\n", hostErr)

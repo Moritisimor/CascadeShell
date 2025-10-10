@@ -14,7 +14,7 @@ import (
 
 func main() {
 	currentUser := envvargatherers.GetUser()
-	currentHost := envvargatherers.GetHome()
+	currentHost := envvargatherers.GetHost()
 	userHome := currentUser.HomeDir
 	os.Chdir(userHome)
 

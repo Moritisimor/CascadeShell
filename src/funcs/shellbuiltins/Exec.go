@@ -20,6 +20,6 @@ func Execute(funcArgs []string, processFlag *bool) {
 	if runErr != nil {
 		color.PrintRedln(runErr.Error())
 	} else {
-		color.PrintGreenln(fmt.Sprintf("Command %s executed successfully.", funcArgs[0]))
+		color.PrintGreenln(fmt.Sprintf("\nCommand %s executed successfully.", funcArgs[0]))
 	}
 }
