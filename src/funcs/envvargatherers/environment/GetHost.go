@@ -1,4 +1,4 @@
-package envvargatherers
+package environment
 
 import (
 	"fmt"

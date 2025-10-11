@@ -2,7 +2,7 @@ package main
 
 import (
 	"CaSh/funcs/color"
-	"CaSh/funcs/envvargatherers"
+	"CaSh/funcs/envvargatherers/environment"
 	"CaSh/funcs/shellbuiltins"
 	"CaSh/funcs/smallhelpers"
 	"CaSh/sigwatchers"
@@ -13,8 +13,8 @@ import (
 )
 
 func main() {
-	currentUser := envvargatherers.GetUser()
-	currentHost := envvargatherers.GetHost()
+	currentUser := environment.GetUser()
+	currentHost := environment.GetHost()
 	userHome := currentUser.HomeDir
 	os.Chdir(userHome)
 
@@ -30,9 +30,9 @@ func main() {
 	activeProcess := false
 	sigwatchers.StartSigTermWatcher(&activeProcess, currentUser.Username, currentHost)
 
-	color.PrintGreenln("<|---------------------- (INFO) ----------------------|>")
-	color.PrintBlueln("GitHub Repo: https://github.com/Moritisimor/CascadeShell")
-	color.PrintGreenln("<|---------------------- (INFO) ----------------------|>\n")
+	color.PrintBlueln("Cascade Shell, Made by Moritisimor.\nhttps://github.com/Moritisimor/CascadeShell\n")
+
+	shellbuiltins.EpsilonFetch()
 
 	reader := bufio.NewReader(os.Stdin)
 	for {
@@ -62,7 +62,7 @@ func main() {
 		case "unlet", "free":
 			shellbuiltins.Unlet(formattedLine, defVars)
 
-		case "lookaround", "ls": // A rather stupid ls implementation since it also lists entries which are hidden (starting with .) but good enough as a basic util.
+		case "lookaround", "ls":
 			shellbuiltins.Lookaround(formattedLine)
 
 		case "whereami", "pwd":
@@ -85,6 +85,9 @@ func main() {
 
 		case "print", "say":
 			shellbuiltins.Say(formattedLine, defVars)
+
+		case "epsilon", "epsilonfetch":
+			shellbuiltins.EpsilonFetch()
 
 		case "":
 			// Do nothing.
