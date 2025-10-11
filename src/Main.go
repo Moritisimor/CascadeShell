@@ -80,6 +80,9 @@ func main() {
 			color.PrintBlueln("Bye!")
 			os.Exit(0)
 
+		case "help":
+			color.PrintBlueln("I was too lazy to implement a real help command so visit https://github.com/Moritisimor/CascadeShell")
+
 		case "print", "say":
 			shellbuiltins.Say(formattedLine, defVars)
 
