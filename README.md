@@ -34,6 +34,7 @@ The only valid variation of this command is ```cd```
 ```Console
 lookaround
 ```
+This command will list the entries of a specified Directory. By default, it does not show hidden directories (those starting with '.') but it can be made to do so with the ```--showhidden``` flag. Specifying no arguments will make it default to the current directory.
 
 The only valid variation of this command is ```ls```.
 
@@ -86,6 +87,14 @@ print <Content>
 This command will print the specified Content to the console. Can also be used to print variables by putting an '@' symbol before the variable name.
 
 The only valid variation of this command is ```say```.
+
+### EpsilonFetch
+```Console
+epsilonfetch
+```
+This command is a built-in Fetch program which tells you basic info about your CPU, Memory and Runtime. It does not work on Android.
+
+The only valid variation of this command is ```epsilon```
 
 ### Exit
 ```Console
