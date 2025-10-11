@@ -7,7 +7,7 @@ import (
 	"CaSh/funcs/smallhelpers"
 )
 
-func StartSigTermWatcher(activityFlag *bool, username string, host string) chan os.Signal {
+func StartSigTermWatcher(activityFlag *bool, username string, host string)  {
 	sigTermWatcher := make(chan os.Signal, 1)
 	signal.Notify(sigTermWatcher, os.Interrupt) 
 	go func() {
@@ -21,6 +21,4 @@ func StartSigTermWatcher(activityFlag *bool, username string, host string) chan 
 			}
 		} 
 	}()
-
-	return sigTermWatcher
 }

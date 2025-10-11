@@ -7,9 +7,18 @@ import (
 )
 
 func Lookaround(funcArgs []string) {
+	showhidden := false
+	for _, i := range(funcArgs) {
+		if strings.Contains(i, "--showhidden") {
+			showhidden = true
+		}
+	}
+
 	targetDir := "./"
 	if len(funcArgs) > 1 {
-		targetDir = strings.TrimSpace(funcArgs[1])
+		if !strings.HasPrefix(strings.TrimSpace(funcArgs[1]), "--") {
+			targetDir = strings.TrimSpace(funcArgs[1])
+		}
 	}
 
 	entries, readingErr := os.ReadDir(targetDir)
@@ -20,13 +29,17 @@ func Lookaround(funcArgs []string) {
 
 	entryCount := 0
 	for _, entry := range(entries) {
-		entryType := ""
+		if !showhidden && strings.HasPrefix(entry.Name(), ".") {
+			continue
+		}
+
+		var entryType string
 		if entry.Type().IsDir() {
-			entryType += "Directory"
+			entryType = "Directory"
 		} else if entry.Type().IsRegular() {
-			entryType += "File"
+			entryType = "File"
 		} else {
-			entryType += "Misc"
+			entryType = "Misc"
 		}
 
 		color.PrintBlue("-> ")
