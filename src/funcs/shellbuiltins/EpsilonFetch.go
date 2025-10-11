@@ -2,12 +2,17 @@ package shellbuiltins
 
 import (
 	"CaSh/funcs/color"
+	"CaSh/funcs/envvargatherers/environment"
 	"CaSh/funcs/envvargatherers/memory"
 	"CaSh/funcs/envvargatherers/processor"
-	"CaSh/funcs/envvargatherers/environment"
 )
 
 func EpsilonFetch() {
+	if environment.GetOS() == "android" {
+		color.PrintRedln("EpsilonFetch does not support Android.")
+		return
+	}
+
 	color.PrintYellowln("[Epsilon Fetch]")
 
 	color.PrintRedln("[Runtime]")
@@ -23,9 +28,6 @@ func EpsilonFetch() {
 
 	color.PrintRed("-> Uptime: ")
 	color.PrintMagentaln(environment.GetUptime())
-
-	color.PrintRed("-> Last Boot Time: ")
-	color.PrintMagentaln(environment.GetLastBootTime())
 
 	color.PrintGreenln("[CPU]")
 
