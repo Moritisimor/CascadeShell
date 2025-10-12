@@ -9,14 +9,14 @@ import (
 func Lookaround(funcArgs []string) {
 	showhidden := false
 	for _, i := range(funcArgs) {
-		if strings.Contains(i, "--showhidden") {
+		if strings.Contains(i, "--showhidden") || strings.Contains(i, "-a") {
 			showhidden = true
 		}
 	}
 
 	targetDir := "./"
 	if len(funcArgs) > 1 {
-		if !strings.HasPrefix(strings.TrimSpace(funcArgs[1]), "--") {
+		if !strings.HasPrefix(strings.TrimSpace(funcArgs[1]), "-") {
 			targetDir = strings.TrimSpace(funcArgs[1])
 		}
 	}
