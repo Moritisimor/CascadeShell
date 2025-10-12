@@ -7,7 +7,6 @@ This project is a shell entirely written in go. It is designed to be portable, s
 ## Known issues
 Like with virtually any other project out there, CλSH has its issues too. These include, but are not limited to:
 
-- Ctrl + C may be buggy.
 - Uparrow for pasting the last command into the prompt does not work. (Or rather is not implemented yet.)
 
 ## Planned features
@@ -15,7 +14,6 @@ While this project does not have a strict roadmap or something along those lines
 
 - Add a .cashrc 
 - Add persistent memory in form of a history file
-- Implement command chaining functionality
 
 ## Commands
 Unlike with many other shells, CλSH talks a lot and will inform the user of success or failure. This is an intentional design choice and serves to help beginners or those who simply want a talkative shell. 
@@ -100,8 +98,16 @@ The only valid variation of this command is ```epsilon```
 ```Console
 exit
 ```
+
 This command will break the Read-Eval-Print-Loop, effectively terminating the running CλSH Process and exiting the program.
 
 The only valid variation of this command is ```bye```.
+
+### Running Commands in Sequence
+```Console
+let x = hello ; let y = world ; say @x @y
+```
+
+Semicolons ';' are used for running commands in sequence. What's important to note is that semicolons must stand completely alone, not appended to a character.
 
 ###### Note: The list of Commands is always subject to change as this project is WIP.

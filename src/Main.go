@@ -43,56 +43,57 @@ func main() {
 			os.Exit(2)
 		}
 
-		formattedLine := strings.Split(strings.TrimSpace(rawLine), " ")
-		switch strings.ToLower(formattedLine[0]) {
-		default:
-			shellbuiltins.Execute(formattedLine, &activeProcess)
+		for _, subcommand := range(strings.Split(strings.TrimSpace(rawLine), ";")) {
+			formattedLine := strings.Split(strings.TrimSpace(subcommand), " ")
+			switch strings.ToLower(formattedLine[0]) {
+			default:
+				shellbuiltins.Execute(formattedLine, &activeProcess)
 
-		case "cd", "chdir":
-			shellbuiltins.Chdir(formattedLine)
+			case "cd", "chdir":
+				shellbuiltins.Chdir(formattedLine)
 
-		case "gohome":
-			os.Chdir(userHome)
-			color.PrintGreenln(fmt.Sprintf("Successfully changed directory to %s", smallhelpers.GetCurrentDir()))
-			color.PrintYellowln("Welcome home!")
+			case "gohome":
+				os.Chdir(userHome)
+				color.PrintGreenln(fmt.Sprintf("Successfully changed directory to %s", smallhelpers.GetCurrentDir()))
+				color.PrintYellowln("Welcome home!")
 
-		case "let", "var":
-			shellbuiltins.Let(formattedLine, defVars)
+			case "let", "var":
+				shellbuiltins.Let(formattedLine, defVars)
 
-		case "unlet", "free":
-			shellbuiltins.Unlet(formattedLine, defVars)
+			case "unlet", "free":
+				shellbuiltins.Unlet(formattedLine, defVars)
 
-		case "lookaround", "ls":
-			shellbuiltins.Lookaround(formattedLine)
+			case "lookaround", "ls":
+				shellbuiltins.Lookaround(formattedLine)
 
-		case "whereami", "pwd":
-			color.PrintBlue("You are in: ")
-			color.PrintYellowln(smallhelpers.GetCurrentDir())
+			case "whereami", "pwd":
+				color.PrintBlue("You are in: ")
+				color.PrintYellowln(smallhelpers.GetCurrentDir())
 
-		case "whoami":
-			color.PrintBlue("You are: ")
-			color.PrintGreenln(currentUser.Username)
+			case "whoami":
+				color.PrintBlue("You are: ")
+				color.PrintGreenln(currentUser.Username)
 
-		case "clear", "clearscreen", "clr":
-			fmt.Print("\033[H\033[2J\033[3J") // ANSI Escape Code for clearing screen and scrollback buffer
+			case "clear", "clearscreen", "clr":
+				fmt.Print("\033[H\033[2J\033[3J") // ANSI Escape Code for clearing screen and scrollback buffer
 
-		case "exit", "quit", "bye":
-			color.PrintBlueln("Bye!")
-			os.Exit(0)
+			case "exit", "quit", "bye":
+				color.PrintBlueln("Bye!")
+				os.Exit(0)
 
-		case "help":
-			color.PrintBlueln("I was too lazy to implement a real help command so visit https://github.com/Moritisimor/CascadeShell")
+			case "help":
+				color.PrintBlueln("I was too lazy to implement a real help command so visit https://github.com/Moritisimor/CascadeShell")
 
-		case "print", "say":
-			shellbuiltins.Say(formattedLine, defVars)
+			case "print", "say":
+				shellbuiltins.Say(formattedLine, defVars)
 
-		case "epsilon", "epsilonfetch":
-			shellbuiltins.EpsilonFetch()
+			case "epsilon", "epsilonfetch":
+				shellbuiltins.EpsilonFetch()
 
-		case "":
-			// Do nothing.
+			case "":
+				// Do nothing.
+			}
+
 		}
-
-		defVars["@lastcommand"] = strings.Join(formattedLine[0:], " ")
 	}
 }
