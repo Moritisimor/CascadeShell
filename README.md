@@ -19,9 +19,9 @@ While this project does not have a strict roadmap or something along those lines
 ## Supported platforms
 - Linux ✅ Works flawlessly
 - FreeBSD ✅ Works flawlessly also
+- Windows ✅ Works just fine
 - Other BSDs ❓ Not tested yet, but compilable for NetBSD and OpenBSD. Feel free to test.
 - MacOS/Darwin ❓ Not tested yet, but also compilable. Feel free to test.
-- Windows ❓ So far only tested on wine, and it did not work. Bare-metal test pending.
 - Android 🟨 The shell itself works fine, but Epsilon Fetch does not work. Probably because Android is too restrictive.
 
 ## Commands
