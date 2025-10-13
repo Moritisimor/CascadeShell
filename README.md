@@ -4,6 +4,8 @@ The Portable and User-Friendly Shell written in Go.
 ## What is this project about?
 This project is a shell entirely written in go. It is designed to be portable, small and run anywhere, only including what it has to and leaving the rest to the OS.
 
+As this Shell is still very early in development, it almost certainly has bugs, some of which may break your system. Use at your own risk!
+
 ## Known issues
 Like with virtually any other project out there, CλSH has its issues too. These include, but are not limited to:
 
@@ -19,10 +21,10 @@ While this project does not have a strict roadmap or something along those lines
 ## Supported platforms
 - Linux ✅ Works flawlessly
 - FreeBSD ✅ Works flawlessly also
-- Windows ✅ Works just fine
+- Windows 🟨 Works just fine, but antivirus software may flag it as a trojan.
+- Android 🟨 The shell itself works fine, but Epsilon Fetch does not work. Probably because Android is too restrictive.
 - Other BSDs ❓ Not tested yet, but compilable for NetBSD and OpenBSD. Feel free to test.
 - MacOS/Darwin ❓ Not tested yet, but also compilable. Feel free to test.
-- Android 🟨 The shell itself works fine, but Epsilon Fetch does not work. Probably because Android is too restrictive.
 
 ## Commands
 Unlike with many other shells, CλSH talks a lot and will inform the user of success or failure. This is an intentional design choice and serves to help beginners or those who simply want a talkative shell. 
