@@ -15,6 +15,15 @@ While this project does not have a strict roadmap or something along those lines
 - Add a .cashrc 
 - Add persistent memory in form of a history file
 
+
+## Supported platforms
+- Linux ✅ Works flawlessly
+- FreeBSD ✅ Works flawlessly also
+- Other BSDs ❓ Not tested yet, but compilable for NetBSD and OpenBSD. Feel free to test.
+- MacOS/Darwin ❓ Not tested yet, but also compilable. Feel free to test.
+- Windows ❓ So far only tested on wine, and it did not work. Bare-metal test pending.
+- Android 🟨 The shell itself works fine, but Epsilon Fetch does not work. Probably because Android is too restrictive.
+
 ## Commands
 Unlike with many other shells, CλSH talks a lot and will inform the user of success or failure. This is an intentional design choice and serves to help beginners or those who simply want a talkative shell. 
 
