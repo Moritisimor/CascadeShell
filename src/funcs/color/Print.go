@@ -24,6 +24,31 @@ func PrintMagenta(printee string) {
 	fmt.Print("\033[35m" + printee + "\033[0m")
 }
 
+func PrintRainbow(printee string) {
+	magicNumber := 0
+	for _, char := range(printee) {
+		switch magicNumber {
+		default:
+			magicNumber = 0
+			PrintBlue(string(char))
+
+		case 1:
+			PrintGreen(string(char))
+
+		case 2:
+			PrintMagenta(string(char))
+
+		case 3:
+			PrintYellow(string(char))
+
+		case 4:
+			PrintRed(string(char))
+		}
+
+		magicNumber++
+	}
+}
+
 // Println variants that append a newline
 
 func PrintRedln(printee string) {
@@ -44,4 +69,8 @@ func PrintYellowln(printee string) {
 
 func PrintMagentaln(printee string) {
 	fmt.Println("\033[35m" + printee + "\033[0m")
+}
+
+func PrintRainbowln(printee string) {
+	PrintRainbow(fmt.Sprintf("%s\n", printee))
 }

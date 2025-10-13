@@ -13,7 +13,7 @@ func EpsilonFetch() {
 		return
 	}
 
-	color.PrintYellowln("[Epsilon Fetch]")
+	color.PrintRainbowln("[Epsilon Fetch]")
 
 	color.PrintRedln("[Runtime]")
 
@@ -63,5 +63,5 @@ func EpsilonFetch() {
 	color.PrintBlue("-> Total Swap Available: ")
 	color.PrintMagentaln(memory.GetFreeSwap())
 
-	color.PrintYellowln("[Epsilon Fetch]\n")
+	color.PrintRainbowln("[Epsilon Fetch]\n")
 }
