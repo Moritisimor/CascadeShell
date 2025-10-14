@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/chzyer/readline"
 	"CaSh/funcs/color"
 	"CaSh/funcs/envvargatherers/environment"
 	"CaSh/funcs/shellbuiltins"
@@ -11,8 +12,6 @@ import (
 	"log"
 	"os"
 	"strings"
-
-	"github.com/chzyer/readline"
 )
 
 func main() {
@@ -51,14 +50,13 @@ func main() {
 		if readingErr != nil {
 			switch readingErr {
 			case readline.ErrInterrupt:
-				// Do nothing.
+				rawLine = ""
 			case io.EOF:
 				os.Exit(0)
 			default:
 				log.Fatal(readingErr.Error())
 			}
 		}
-	
 
 		for _, subcommand := range(strings.Split(strings.TrimSpace(rawLine), ";")) {
 			formattedLine := strings.Split(strings.TrimSpace(subcommand), " ")
