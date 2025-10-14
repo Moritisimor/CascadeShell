@@ -15,6 +15,7 @@ Like with virtually any other project out there, CλSH has its issues too. These
 While this project does not have a strict roadmap or something along those lines, features may always be planned for the future! Current plans include:
 
 - Add a .cashrc 
+- Add Tab Autocomplete
 
 ## Supported platforms
 - Linux ✅ Works flawlessly
