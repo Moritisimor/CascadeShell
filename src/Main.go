@@ -7,9 +7,11 @@ import (
 	"CaSh/funcs/smallhelpers"
 	"CaSh/sigwatchers"
 	"fmt"
+	"io"
 	"log"
 	"os"
 	"strings"
+
 	"github.com/chzyer/readline"
 )
 
@@ -34,22 +36,29 @@ func main() {
 	shellbuiltins.EpsilonFetch()
 	smallhelpers.MakeHistory()
 
-	reader, readerCreateErr := readline.NewEx(&readline.Config{
-		Prompt: smallhelpers.SPrintPrompt(currentUser.Username, currentHost, smallhelpers.GetCurrentDir()),
-		HistoryFile: smallhelpers.GetHistory(),
-	})
-
-	if readerCreateErr != nil {
-		log.Fatal(readerCreateErr.Error())
-	}
-
 	for {
-		smallhelpers.Drawprompt(currentUser.Username, currentHost, smallhelpers.GetCurrentDir())
+		reader, readerCreateErr := readline.NewEx(&readline.Config {
+			Prompt: smallhelpers.SPrintPrompt(currentUser.Username, currentHost, smallhelpers.GetCurrentDir()),
+			InterruptPrompt: "^C",
+			HistoryFile: smallhelpers.GetHistory(),
+		})
+
+		if readerCreateErr != nil {
+			log.Fatal(readerCreateErr.Error())
+		}
+
 		rawLine, readingErr := reader.Readline()
 		if readingErr != nil {
-			color.PrintRed(fmt.Sprintf("FATAL! Reading Line failed! Exiting...\nError: %s", readingErr.Error()))
-			os.Exit(2)
+			switch readingErr {
+			case readline.ErrInterrupt:
+				// Do nothing.
+			case io.EOF:
+				os.Exit(0)
+			default:
+				log.Fatal(readingErr.Error())
+			}
 		}
+	
 
 		for _, subcommand := range(strings.Split(strings.TrimSpace(rawLine), ";")) {
 			formattedLine := strings.Split(strings.TrimSpace(subcommand), " ")
