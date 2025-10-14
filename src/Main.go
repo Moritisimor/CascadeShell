@@ -6,17 +6,17 @@ import (
 	"CaSh/funcs/shellbuiltins"
 	"CaSh/funcs/smallhelpers"
 	"CaSh/sigwatchers"
-	"bufio"
 	"fmt"
+	"log"
 	"os"
 	"strings"
+	"github.com/chzyer/readline"
 )
 
 func main() {
 	currentUser := environment.GetUser()
 	currentHost := environment.GetHost()
 	userHome := currentUser.HomeDir
-	os.Chdir(userHome)
 
 	defVars := map[string]string {
 		"@shell": 		"cash",
@@ -31,13 +31,21 @@ func main() {
 	sigwatchers.StartSigTermWatcher(&activeProcess, currentUser.Username, currentHost)
 
 	color.PrintBlueln("Cascade Shell, Made by Moritisimor.\nhttps://github.com/Moritisimor/CascadeShell\n")
-
 	shellbuiltins.EpsilonFetch()
+	smallhelpers.MakeHistory()
 
-	reader := bufio.NewReader(os.Stdin)
+	reader, readerCreateErr := readline.NewEx(&readline.Config{
+		Prompt: smallhelpers.SPrintPrompt(currentUser.Username, currentHost, smallhelpers.GetCurrentDir()),
+		HistoryFile: smallhelpers.GetHistory(),
+	})
+
+	if readerCreateErr != nil {
+		log.Fatal(readerCreateErr.Error())
+	}
+
 	for {
 		smallhelpers.Drawprompt(currentUser.Username, currentHost, smallhelpers.GetCurrentDir())
-		rawLine, readingErr := reader.ReadString('\n')
+		rawLine, readingErr := reader.Readline()
 		if readingErr != nil {
 			color.PrintRed(fmt.Sprintf("FATAL! Reading Line failed! Exiting...\nError: %s", readingErr.Error()))
 			os.Exit(2)
@@ -90,10 +98,8 @@ func main() {
 			case "epsilon", "epsilonfetch":
 				shellbuiltins.EpsilonFetch()
 
-			case "":
-				// Do nothing.
+			case "": // Do nothing.
 			}
-
 		}
 	}
 }

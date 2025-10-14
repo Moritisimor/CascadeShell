@@ -2,7 +2,10 @@ module CaSh
 
 go 1.25.1
 
-require github.com/shirou/gopsutil/v4 v4.25.9
+require (
+	github.com/chzyer/readline v1.5.1
+	github.com/shirou/gopsutil/v4 v4.25.9
+)
 
 require (
 	github.com/ebitengine/purego v0.9.0 // indirect

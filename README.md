@@ -9,14 +9,12 @@ As this Shell is still very early in development, it almost certainly has bugs, 
 ## Known issues
 Like with virtually any other project out there, CλSH has its issues too. These include, but are not limited to:
 
-- Uparrow for pasting the last command into the prompt does not work. (Or rather is not implemented yet.)
+- Pipes don't work (not implemented yet)
 
 ## Planned features
 While this project does not have a strict roadmap or something along those lines, features may always be planned for the future! Current plans include:
 
 - Add a .cashrc 
-- Add persistent memory in form of a history file
-
 
 ## Supported platforms
 - Linux ✅ Works flawlessly
