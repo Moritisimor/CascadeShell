@@ -25,7 +25,6 @@ func main() {
 		"@userID":		currentUser.Uid,
 		"@host":		currentHost,
 		"@home":		userHome,
-		"@lastcommand": "undefined",
 	}
 
 	activeProcess := false
