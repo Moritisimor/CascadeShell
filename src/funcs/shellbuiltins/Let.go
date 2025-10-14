@@ -13,18 +13,18 @@ func Let(funcArgs []string, symbolTable map[string]string) {
 
 		return
 	}
-		trueVar := ""
-		if strings.HasPrefix(funcArgs[1], "@") {
-			trueVar = funcArgs[1]
-		} else {
-			trueVar = "@" + funcArgs[1]
-		}
+	trueVar := ""
+	if strings.HasPrefix(funcArgs[1], "@") {
+		trueVar = funcArgs[1]
+	} else {
+		trueVar = "@" + funcArgs[1]
+	}
 
-		starter := 2
-		if funcArgs[2] == "=" {
-			starter = 3
-		}
+	starter := 2
+	if funcArgs[2] == "=" {
+		starter = 3
+	}
 
-		symbolTable[trueVar] = strings.Join(funcArgs[starter:], " ")
-		color.PrintGreenln(fmt.Sprintf("Variable %s declared successfully.", trueVar))
+	symbolTable[trueVar] = strings.Join(funcArgs[starter:], " ")
+	color.PrintGreenln(fmt.Sprintf("Variable %s declared successfully.", trueVar))
 }

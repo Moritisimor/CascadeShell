@@ -20,7 +20,7 @@ func Say(funcArgs []string, symbolTable map[string]string) {
 	for _, i := range funcArgs[1:] {
 		if strings.HasPrefix(i, "@") {
 			if symbolTable[i] != "" {
-				printBuf += symbolTable[i]
+				printBuf += symbolTable[i] + " "
 			} else {
 				printBuf = "Unknown variable: " + i
 			}

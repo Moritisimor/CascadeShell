@@ -8,8 +8,8 @@ import (
 
 func Lookaround(funcArgs []string) {
 	showhidden := false
-	for _, i := range(funcArgs) {
-		if strings.Contains(i, "--showhidden") || strings.Contains(i, "-a") {
+	for _, arg := range(funcArgs) {
+		if strings.Contains(arg, "--showhidden") || strings.Contains(arg, "-a") {
 			showhidden = true
 		}
 	}
