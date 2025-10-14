@@ -1,15 +1,12 @@
 package main
 
 import (
-	"github.com/chzyer/readline"
 	"CaSh/funcs/color"
 	"CaSh/funcs/envvargatherers/environment"
 	"CaSh/funcs/shellbuiltins"
 	"CaSh/funcs/smallhelpers"
 	"CaSh/sigwatchers"
 	"fmt"
-	"io"
-	"log"
 	"os"
 	"strings"
 )
@@ -35,27 +32,8 @@ func main() {
 	smallhelpers.MakeHistory()
 
 	for {
-		reader, readerCreateErr := readline.NewEx(&readline.Config {
-			Prompt: smallhelpers.SPrintPrompt(currentUser.Username, currentHost, smallhelpers.GetCurrentDir()),
-			InterruptPrompt: "^C",
-			HistoryFile: smallhelpers.GetHistory(),
-		})
-
-		if readerCreateErr != nil {
-			log.Fatal(readerCreateErr.Error())
-		}
-
-		rawLine, readingErr := reader.Readline()
-		if readingErr != nil {
-			switch readingErr {
-			case readline.ErrInterrupt:
-				rawLine = ""
-			case io.EOF:
-				os.Exit(0)
-			default:
-				log.Fatal(readingErr.Error())
-			}
-		}
+		reader := smallhelpers.MakeReader() 
+		rawLine := smallhelpers.GetLine(reader)
 
 		for _, subcommand := range(strings.Split(strings.TrimSpace(rawLine), ";")) {
 			formattedLine := strings.Split(strings.TrimSpace(subcommand), " ")
