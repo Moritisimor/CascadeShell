@@ -55,6 +55,12 @@ func main() {
 			case "let", "var":
 				shellbuiltins.Let(formattedLine, defVars)
 
+			case "showhist", "hist":
+				smallhelpers.ReadHistory()
+
+			case "clearhist", "rmhist":
+				smallhelpers.ClearHistory()
+
 			case "unlet", "free":
 				shellbuiltins.Unlet(formattedLine, defVars)
 
