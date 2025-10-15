@@ -60,6 +60,14 @@ whoami
 ```
 This command will print the current user to the console.
 
+### Exec
+```Console
+exec <Program>
+```
+This command is functionally identical to just running the the program with the command directly, but using exec to run it will ignore shell builtins.
+
+Exec primarily exists to ensure that shell builtins won't obstruct usage of other programs which may have the same name.
+
 ### Let
 ```Console
 let greeting hello

@@ -41,6 +41,9 @@ func main() {
 			default:
 				shellbuiltins.Execute(formattedLine, &activeProcess)
 
+			case "exec":
+				shellbuiltins.Execute(formattedLine[1:], &activeProcess)
+
 			case "cd", "chdir":
 				shellbuiltins.Chdir(formattedLine)
 
