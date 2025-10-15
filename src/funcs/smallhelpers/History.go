@@ -47,19 +47,10 @@ func ReadHistory() {
 }
 
 func ClearHistory() {
-	var response string
-	color.PrintBlue("Clear History?\nY/N: ")
-	fmt.Scanf("%s", &response)
-
-	if Normalize(response) == "yes" || Normalize(response) == "y" {
-		err := os.Remove(GetHistory())
-		if err != nil {
-			log.Fatal(err.Error())
-		}
-
-		color.PrintGreenln("Successfully cleared history!")
-		return
+	err := os.Remove(GetHistory())
+	if err != nil {
+		log.Fatal(err.Error())
 	}
 
-	color.PrintBlueln("Cancelled history clear!")
+	color.PrintGreenln("Successfully cleared history!")
 }

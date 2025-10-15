@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"os"
 	"os/signal"
-	"CaSh/funcs/smallhelpers"
 )
 
 func StartSigTermWatcher(activityFlag *bool, username string, host string)  {
@@ -17,7 +16,6 @@ func StartSigTermWatcher(activityFlag *bool, username string, host string)  {
 				break
 			} else {
 				fmt.Println()
-				smallhelpers.Drawprompt(username, host, smallhelpers.GetCurrentDir())
 			}
 		} 
 	}()
