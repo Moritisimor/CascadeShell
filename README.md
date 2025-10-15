@@ -83,12 +83,25 @@ This command will uninitialize a variable, deleting it from the internal map whi
 The only valid variation of this command is ```free```
 
 ### Clear
-```console
+```Console
 clear
 ```
 This command will clear the screen and scrollbuffer.
 
 The only valid variation of this command is ```clearscreen```
+
+### Hist
+```Console
+hist
+```
+This command will print the command history.
+
+The only valid variation of this command is ```showhist```
+
+### Clearhist
+```Console
+This command will clear the command history by deleting the file and creating a new one.
+```
 
 ### Gohome
 ```Console

@@ -58,7 +58,7 @@ func main() {
 			case "showhist", "hist":
 				smallhelpers.ReadHistory()
 
-			case "clearhist", "rmhist":
+			case "clearhist":
 				smallhelpers.ClearHistory()
 
 			case "unlet", "free":
