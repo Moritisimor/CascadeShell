@@ -2,18 +2,30 @@ package main
 
 import (
 	"CaSh/funcs/color"
-	"CaSh/funcs/envvargatherers/environment"
 	"CaSh/funcs/shellbuiltins"
 	"CaSh/funcs/smallhelpers"
 	"CaSh/sigwatchers"
 	"fmt"
 	"os"
+	"os/user"
 	"strings"
+
+	"github.com/Moritisimor/EpsilonFetch/pkg/epsilonfetch"
 )
 
 func main() {
-	currentUser := environment.GetUser()
-	currentHost := environment.GetHost()
+	currentUser, userErr := user.Current()
+	if userErr != nil {
+		color.PrintRedln(userErr.Error())
+		return
+	}
+
+	currentHost, hostErr := os.Hostname()
+	if hostErr != nil {
+		color.PrintRedln(hostErr.Error())
+		return
+	}
+
 	userHome := currentUser.HomeDir
 
 	defVars := map[string]string {
@@ -28,7 +40,7 @@ func main() {
 	sigwatchers.StartSigTermWatcher(&activeProcess, currentUser.Username, currentHost)
 
 	color.PrintBlueln("Cascade Shell, Made by Moritisimor.\nhttps://github.com/Moritisimor/CascadeShell\n")
-	shellbuiltins.EpsilonFetch()
+	epsilonfetch.EpsilonFetch()
 	smallhelpers.MakeHistory()
 
 	for {
@@ -89,7 +101,7 @@ func main() {
 				shellbuiltins.Say(formattedLine, defVars)
 
 			case "epsilon", "epsilonfetch":
-				shellbuiltins.EpsilonFetch()
+				epsilonfetch.EpsilonFetch()
 
 			case "": // Do nothing.
 			}

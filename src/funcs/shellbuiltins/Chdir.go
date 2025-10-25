@@ -2,13 +2,14 @@ package shellbuiltins
 
 import (
 	"CaSh/funcs/color"
-	"CaSh/funcs/envvargatherers/environment"
 	"CaSh/funcs/smallhelpers"
 	"os"
+	"os/user"
 )
 
 func Chdir(funcArgs []string) {
-	target := environment.GetUser().HomeDir
+	currentUser, _ := user.Current()
+	target := currentUser.HomeDir
 	if len(funcArgs) > 1 {
 		target = funcArgs[1]
 	}
@@ -20,7 +21,7 @@ func Chdir(funcArgs []string) {
 		color.PrintYellowln(smallhelpers.GetCurrentDir())
 	}
 
-	if target == environment.GetUser().HomeDir {
+	if target == currentUser.HomeDir {
 		color.PrintYellowln("Welcome home!")
 	}
 }

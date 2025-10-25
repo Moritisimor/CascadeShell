@@ -2,25 +2,26 @@ package smallhelpers
 
 import (
 	"CaSh/funcs/color"
-	"CaSh/funcs/envvargatherers/environment"
 	"bufio"
 	"fmt"
 	"log"
 	"os"
+	"os/user"
 )
 
 func MakeHistory() {
-	_, dirErr := os.Stat(environment.GetUser().HomeDir + string(os.PathSeparator) + ".cash")
+	currentUser, _ := user.Current()
+	_, dirErr := os.Stat(currentUser.HomeDir + string(os.PathSeparator) + ".cash")
 	if os.IsNotExist(dirErr) {
-		directoryErr := os.Mkdir(environment.GetUser().HomeDir + string(os.PathSeparator) + ".cash", 0755)
+		directoryErr := os.Mkdir(currentUser.HomeDir + string(os.PathSeparator) + ".cash", 0755)
 		if directoryErr != nil {
 			log.Fatalf("Could not create .cash directory!\nError: %s", directoryErr.Error())
 		}
 	}
 
-	_, fileErr := os.Stat(environment.GetUser().HomeDir + string(os.PathSeparator) + ".cash" + string(os.PathSeparator) + "cashhistory")
+	_, fileErr := os.Stat(currentUser.HomeDir + string(os.PathSeparator) + ".cash" + string(os.PathSeparator) + "cashhistory")
 	if os.IsNotExist(fileErr) {
-		_, creationErr := os.Create(environment.GetUser().HomeDir + string(os.PathSeparator) + ".cash" + string(os.PathSeparator) + "cashhistory")
+		_, creationErr := os.Create(currentUser.HomeDir + string(os.PathSeparator) + ".cash" + string(os.PathSeparator) + "cashhistory")
 		if creationErr != nil {
 			log.Fatalf("Could not create cashhistory file!\nError: %s", creationErr.Error())
 		}
@@ -28,7 +29,8 @@ func MakeHistory() {
 }
 
 func GetHistory() string {
-	return environment.GetUser().HomeDir + string(os.PathSeparator) + ".cash" + string(os.PathSeparator) + "cashhistory"
+	currentUser, _ := user.Current()
+	return currentUser.HomeDir + string(os.PathSeparator) + ".cash" + string(os.PathSeparator) + "cashhistory"
 }
 
 func ReadHistory() {

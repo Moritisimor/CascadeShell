@@ -1,14 +1,18 @@
 package smallhelpers
 
 import (
-	"github.com/chzyer/readline"
-	"CaSh/funcs/envvargatherers/environment"
 	"log"
+	"os"
+	"os/user"
+
+	"github.com/chzyer/readline"
 )
 
 func MakeReader() readline.Instance {
+	currentUser, _ := user.Current()
+	currentHost, _ := os.Hostname()
 	reader, readerCreateErr := readline.NewEx(&readline.Config {
-		Prompt: SPrintPrompt(environment.GetUser().Username, environment.GetHost(), GetCurrentDir()),
+		Prompt: SPrintPrompt(currentUser.Username, currentHost, GetCurrentDir()),
 		InterruptPrompt: "^C",
 		HistoryFile: GetHistory(),
 	})
