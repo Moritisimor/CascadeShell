@@ -123,6 +123,8 @@ epsilonfetch
 ```
 This command is a built-in Fetch program which tells you basic info about your CPU, Memory and Runtime. It does not work on Android.
 
+Visit the Repository on https://github.com/Moritisimor/EpsilonFetch
+
 The only valid variation of this command is ```epsilon```
 
 ### Exit
