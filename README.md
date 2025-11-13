@@ -100,8 +100,9 @@ The only valid variation of this command is ```showhist```
 
 ### Clearhist
 ```Console
-This command will clear the command history by deleting the file and creating a new one.
+clearhist
 ```
+This command will clear the command history by deleting the file and creating a new one.
 
 ### Gohome
 ```Console
