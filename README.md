@@ -4,7 +4,7 @@ The Portable and User-Friendly Shell written in Go.
 ## What is this project about?
 This project is a shell entirely written in go. It is designed to be portable, small and run anywhere, only including what it has to and leaving the rest to the OS.
 
-As this Shell is still very early in development, it almost certainly has bugs, some of which may break your system. Use at your own risk!
+Although this shell is stable now, bugs may still appear, some of which can break your system. Use at your own risk!
 
 ## Known issues
 Like with virtually any other project out there, CλSH has its issues too. These include, but are not limited to:
