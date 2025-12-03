@@ -1,7 +1,7 @@
-package smallhelpers
+package helpers
 
 import (
-	"CaSh/funcs/color"
+	"github.com/Moritisimor/EpsilonFetch/pkg/color"
 	"bufio"
 	"fmt"
 	"log"

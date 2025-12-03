@@ -1,8 +1,6 @@
-package smallhelpers
+package helpers
 
-import (
-	"CaSh/funcs/color"
-)
+import "github.com/Moritisimor/EpsilonFetch/pkg/color"
 
 func Drawprompt(user string, host string, currentDir string) {
 	color.PrintBlue("[")

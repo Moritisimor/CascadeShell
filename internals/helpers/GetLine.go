@@ -1,4 +1,4 @@
-package smallhelpers
+package helpers
 
 import (
 	"github.com/chzyer/readline"

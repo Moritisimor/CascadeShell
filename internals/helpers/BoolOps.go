@@ -1,4 +1,4 @@
-package smallhelpers
+package helpers
 
 func SetTrue(falsee *bool) {
 	*falsee = true

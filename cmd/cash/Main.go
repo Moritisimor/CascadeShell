@@ -1,10 +1,9 @@
 package main
 
 import (
-	"CaSh/funcs/color"
-	"CaSh/funcs/shellbuiltins"
-	"CaSh/funcs/smallhelpers"
-	"CaSh/sigwatchers"
+	"github.com/Moritisimor/EpsilonFetch/pkg/color"
+	"github.com/Moritisimor/CascadeShell/internals/shellbuiltins"
+	"github.com/Moritisimor/CascadeShell/internals/helpers"
 	"fmt"
 	"os"
 	"os/user"
@@ -37,15 +36,14 @@ func main() {
 	}
 
 	activeProcess := false
-	sigwatchers.StartSigTermWatcher(&activeProcess, currentUser.Username, currentHost)
 
 	color.PrintBlueln("Cascade Shell, Made by Moritisimor.\nhttps://github.com/Moritisimor/CascadeShell\n")
 	epsilonfetch.EpsilonFetch()
-	smallhelpers.MakeHistory()
+	helpers.MakeHistory()
 
 	for {
-		reader := smallhelpers.MakeReader() 
-		rawLine := smallhelpers.GetLine(reader)
+		reader := helpers.MakeReader() 
+		rawLine := helpers.GetLine(reader)
 
 		for _, subcommand := range(strings.Split(strings.TrimSpace(rawLine), ";")) {
 			formattedLine := strings.Split(strings.TrimSpace(subcommand), " ")
@@ -61,17 +59,17 @@ func main() {
 
 			case "gohome":
 				os.Chdir(userHome)
-				color.PrintGreenln(fmt.Sprintf("Successfully changed directory to %s", smallhelpers.GetCurrentDir()))
+				color.PrintGreenln(fmt.Sprintf("Successfully changed directory to %s", helpers.GetCurrentDir()))
 				color.PrintYellowln("Welcome home!")
 
 			case "let", "var":
 				shellbuiltins.Let(formattedLine, defVars)
 
 			case "showhist", "hist":
-				smallhelpers.ReadHistory()
+				helpers.ReadHistory()
 
 			case "clearhist":
-				smallhelpers.ClearHistory()
+				helpers.ClearHistory()
 
 			case "unlet", "free":
 				shellbuiltins.Unlet(formattedLine, defVars)
@@ -81,7 +79,7 @@ func main() {
 
 			case "whereami", "pwd":
 				color.PrintBlue("You are in: ")
-				color.PrintYellowln(smallhelpers.GetCurrentDir())
+				color.PrintYellowln(helpers.GetCurrentDir())
 
 			case "whoami":
 				color.PrintBlue("You are: ")

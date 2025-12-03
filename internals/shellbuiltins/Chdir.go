@@ -1,8 +1,8 @@
 package shellbuiltins
 
 import (
-	"CaSh/funcs/color"
-	"CaSh/funcs/smallhelpers"
+	"github.com/Moritisimor/EpsilonFetch/pkg/color"
+	"github.com/Moritisimor/CascadeShell/internals/helpers"
 	"os"
 	"os/user"
 )
@@ -18,7 +18,7 @@ func Chdir(funcArgs []string) {
 		color.PrintRedln(cdErr.Error())
 	} else {
 		color.PrintGreen("Successfully changed directory to ")
-		color.PrintYellowln(smallhelpers.GetCurrentDir())
+		color.PrintYellowln(helpers.GetCurrentDir())
 	}
 
 	if target == currentUser.HomeDir {
