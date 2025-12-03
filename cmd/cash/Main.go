@@ -1,14 +1,15 @@
 package main
 
 import (
-	"github.com/Moritisimor/EpsilonFetch/pkg/color"
 	"github.com/Moritisimor/CascadeShell/internals/shellbuiltins"
 	"github.com/Moritisimor/CascadeShell/internals/helpers"
+	"github.com/Moritisimor/CascadeShell/internals/sigwatchers"
 	"fmt"
 	"os"
 	"os/user"
 	"strings"
 
+	"github.com/Moritisimor/EpsilonFetch/pkg/color"
 	"github.com/Moritisimor/EpsilonFetch/pkg/epsilonfetch"
 )
 
@@ -36,6 +37,7 @@ func main() {
 	}
 
 	activeProcess := false
+	sigwatchers.StartSigTermWatcher(&activeProcess, currentUser.Name, currentHost)
 
 	color.PrintBlueln("Cascade Shell, Made by Moritisimor.\nhttps://github.com/Moritisimor/CascadeShell\n")
 	epsilonfetch.EpsilonFetch()
