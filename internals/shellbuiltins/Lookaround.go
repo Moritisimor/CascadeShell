@@ -1,7 +1,7 @@
 package shellbuiltins
 
 import (
-	"CaSh/funcs/color"
+	"github.com/Moritisimor/EpsilonFetch/pkg/color"
 	"os"
 	"strings"
 )
