@@ -2,7 +2,7 @@ package shellbuiltins
 
 import (
 	"github.com/Moritisimor/EpsilonFetch/pkg/color"
-	"github.com/Moritisimor/CascadeShell/internals/helpers"
+	"github.com/Moritisimor/CascadeShell/internal/helpers"
 	"os"
 	"os/user"
 )

@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/Moritisimor/CascadeShell/internals/shellbuiltins"
-	"github.com/Moritisimor/CascadeShell/internals/helpers"
-	"github.com/Moritisimor/CascadeShell/internals/sigwatchers"
+	"github.com/Moritisimor/CascadeShell/internal/shellbuiltins"
+	"github.com/Moritisimor/CascadeShell/internal/helpers"
+	"github.com/Moritisimor/CascadeShell/internal/sigwatchers"
 	"fmt"
 	"os"
 	"os/user"
@@ -13,6 +13,8 @@ import (
 	"github.com/Moritisimor/EpsilonFetch/pkg/epsilonfetch"
 )
 
+// Cascade Shell, or CaSh, is a shell written in Go. It is designed to be tolerant
+// of errors and beginner-friendly with its many built-in aliases for common commands.
 func main() {
 	currentUser, userErr := user.Current()
 	if userErr != nil {
